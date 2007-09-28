@@ -1,0 +1,237 @@
+Absorb Strength,33
+Absorb-AGI,33
+Absorb-CHR,33
+Absorb-DEX,33
+Absorb-INT,33
+Absorb-MND,33
+Absorb-STR,60
+Absorb-VIT,33
+Aerial Armor,92
+Aero,18
+Aero II,59
+Aero III,106
+Aero IV,150
+Aeroga,57
+Aeroga II,138
+Aeroga III,252
+Air Spirit Pact,10
+Aquaveil,12
+Aspir,10
+Axe Kick,10
+Banish,15
+Banish II,57
+Banish III,127
+Banishga,41
+Banishga II,127
+Banishga III,127
+Baraera,12
+Baraero,9
+Barblind,13
+Barblindra,26
+Barblizzara,18
+Barblizzard,9
+Barfira,12
+Barfire,9
+Barparalyze,11
+Barparalyzra,22
+Barpetra,40
+Barpetrify,20
+Barpoison,9
+Barpoisonra,18
+Barracuda Dive,8
+Barsilence,15
+Barsilencera,30
+Barsleep,7
+Barsleepra,14
+Barstone,6
+Barstonra,12
+Barthunder,9
+Barthundra,18
+Barvira,50
+Barvirus,25
+Barwater,9
+Barwatera,18
+Bind,8
+Bio,15
+Bio II,36
+Bio III,110
+Blaze Spikes,8
+Blind,5
+Blindna,16
+Blink,20
+Blizzaga,82
+Blizzaga II,175
+Blizzaga III,299
+Blizzard,30
+Blizzard II,77
+Blizzard III,120
+Blizzard IV,164
+Burn,25
+Burning Strike,48
+Burst,352
+Carbuncle,5
+Choke,25
+Claw,7
+Crimson Roar,84
+Curaga,60
+Curaga II,120
+Curaga III,127
+Curaga IV,240
+Cure,8
+Cure II,24
+Cure III,46
+Cure IV,96
+Cure V,127
+Cursna,30
+Dark Spirit Pact,10
+Dazzling Ruby,62
+Deodorize,10
+Dia,7
+Dia II,30
+Dia III,112
+Diaga,12
+Diaga II,60
+Diamond Dust,0
+Dispel,25
+Double Punch,56
+Double Slap,82
+Drain,21
+Drown,25
+Earth Spirit Pact,10
+Enaero,12
+Enblizzard,12
+Enfire,12
+Enstone,12
+Enthunder,12
+Enwater,12
+Erase,18
+Escape,125
+Firaga,71
+Firaga II,158
+Firaga III,277
+Fire,24
+Fire II,68
+Fire III,113
+Fire IV,157
+Fire Spirit Pact,10
+Flare,383
+Flash,25
+Flood,368
+Freeze,307
+Freeze Armor,68
+Frost,25
+Gravity,24
+Guardian of Earth,92
+Haste,40
+Hastega,112
+Healing Ruby,5
+Holy,100
+Ice Spikes,16
+Ice Spirit Pact,10
+Inferno,0
+Invisible,15
+Judgement Bolt,0
+Life II,127
+Light Spirit Pact,10
+Lightning Spirit Pact,10
+Magalith Throw,62
+Paralyna,12
+Paralyze,6
+Phalanx,21
+Poison,5
+Poison II,38
+Poison Nail,11
+Poisona,8
+Poisonga,44
+Poisonga II,112
+Protect,9
+Protect II,28
+Protect III,46
+Protect IV,65
+Protect IV,65
+Protectra,9
+Protectra II,28
+Protectra III,46
+Protectra IV,65
+Punch,9
+Quake,337
+Raise,127
+Raise II,127
+Raise III,250
+Rasp,25
+Refresh,40
+Regen,15
+Regen II,36
+Regen III,64
+Reraise,127
+Reraise II,175
+Reraise III,250
+Rock Buster,39
+Rock Throw,10
+Rolling Thunder,52
+Ruby Light,0
+Ruby Radiance,44
+Shell,18
+Shell II,37
+Shell III,56
+Shell IV,56
+Shellra,18
+Shellra II,37
+Shellra III,56
+Shellra IV,56
+Shock,25
+Shock Spikes,24
+Shock Strike,6
+Silena,16
+Silence,16
+Sleep,19
+Sleep II,29
+Sleepga,38
+Sleepga II,58
+Slow,15
+Slowga,48
+Small Meteo,108
+Sneak,12
+Spring Water,127
+Stona,40
+Stone,9
+Stone II,43
+Stone III,92
+Stone IV,138
+Stonega,37
+Stonega II,109
+Stonega III,211
+Stoneskin,29
+Stun,25
+Tail Whip,49
+Teleport-Altep,100
+Teleport-Dem,75
+Teleport-Holla,75
+Teleport-Mea,75
+Teleport-Vahzl,100
+Teleport-Yhoat,100
+Thundaga,95
+Thundaga II,193
+Thundaga III,322
+Thunder Armor,91
+Thunder,37
+Thunder II,86
+Thunder III,128
+Thunder IV,171
+Thunder Spark,38
+Tornado,322
+Tractor,26
+Tsunami,0
+Viruna,48
+Warp,100
+Warp II,150
+Water,13
+Water II,51
+Water III,98
+Water IV,144
+Water Spirit Pact,10
+Waterga,47
+Waterga II,123
+Waterga III,231
+Whispering Wind,92
+Wind Storm,0

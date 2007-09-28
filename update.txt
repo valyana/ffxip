@@ -1,0 +1,1 @@
+Version: 6.7.1|Fix: Problems with Alt-Home.|Fix: Ready sound not being disabled when it is turned off.

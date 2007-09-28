@@ -1,0 +1,141 @@
+Flaming Arrow 
+Piercing Arrow 
+Dulling Arrow 
+Sidewinder 
+Blast Arrow 
+Arching Arrow 
+Empyrial Arrow 
+Namas Arrow 
+Raging Axe 
+Smash Axe
+Gale Axe 
+Avalanche Axe 
+Spinning Axe 
+Rampage 
+Calamity 
+Mistral Axe 
+Decimation 
+Onslaught 
+Shining Strike 
+Seraph Strike 
+Brainshaker 
+Starlight 
+Moonlight 
+Skullbreaker 
+True Strike 
+Judgment 
+Hexa Strike 
+Black Halo 
+Randgrith 
+Wasp Sting 
+Viper Bite 
+Shadowstitch
+Gust Slash
+Cyclone 
+Energy Steal
+Energy Drain 
+Dancing Edge 
+Shark Bite 
+Evisceration
+Mercy Stroke 
+Shield Break 
+Iron Tempest 
+Sturmwind
+Armor Break
+Keen Edge
+Weapon Break
+Raging Rush
+Full Break
+Steel Cyclone
+Metatron Torment 
+Tachi: Enpi 
+Tachi: Hobaku 
+Tachi: Goten 
+Tachi: Kagero 
+Tachi: Jinpu 
+Tachi: Koki 
+Tachi: Yukikaze 
+Tachi: Gekko 
+Tachi: Kasha
+Tachi: Kaiten 
+Hard Slash 
+Power Slash 
+Frostbite 
+Freezebite 
+Shockwave 
+Crescent Moon 
+Sickle Moon 
+Spinning Slash 
+Ground Strike 
+Scourge 
+Combo 
+Shoulder Tackle 
+One Inch Punch 
+Backhand Blow 
+Raging Fists 
+Spinning Attack 
+Howling Fist 
+Dragon Kick 
+Asuran Fists 
+Final Heaven 
+Blade: Rin 
+Blade: Retsu 
+Blade: Teki 
+Blade: To 
+Blade: Chi 
+Blade: Ei 
+Blade: Jin 
+Blade: Ten 
+Blade: Ku 
+Blade: Metsu 
+Hot Shot 
+Split Shot 
+Sniper Shot 
+Slug Shot 
+Blast Shot 
+Heavy Shot 
+Detonator 
+Coronach 
+Slice 
+Dark Harvest 
+Shadow of Death 
+Nightmare Scythe 
+Spinning Scythe 
+Vorpal Scythe 
+Guillotine 
+Cross Reaper 
+Spiral Hell 
+Catastrophe 
+Double Thrust 
+Thunder Thrust 
+Raiden Thrust 
+Leg Sweep 
+Penta Thrust 
+Vorpal Thrust 
+Skewer 
+Great Wheel
+Wheeling Thrust 
+Impulse Drive 
+Geirskogul 
+Heavy Swing 
+Rock Crusher 
+Earth Crusher 
+Starburst 
+Sunburst 
+Shell Crusher 
+Full Swing 
+Spirit Taker 
+Retribution 
+Gate of Tartarus 
+Fast Blade 
+Burning Blade 
+Red Lotus Blade
+Flat Blade 
+Shining Blade 
+Seraph Blade 
+Circle Blade 
+Spirits Within 
+Vorpal Blade 
+Swift Blade 
+Savage Blade 
+Knights of Round
