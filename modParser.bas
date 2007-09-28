@@ -71,6 +71,7 @@ Public Type udtEfficiency
     ATKTaken As Integer
     DMGTaken As Long
 End Type
+'Too small for HNM
 Public BattleStats(50) As udtStatistics
 Public BattleTotals As udtStatistics
 Public SummaryStats() As udtStatistics
@@ -90,7 +91,8 @@ Public ReportOptions(37)
 Public ErrorFile, ErrorCount As Integer, ReportError As String
 
 Public TypeDone As String
-Public Gather As Boolean, ParseGather As Boolean, GatherDate As Boolean, OpenSingle As Boolean, SingleFile As String, ExportFile As String, ClearEdit As Boolean, NotClearFile As Boolean, BeepSounds(10) As String, StartWithOpen As String, KeyLogs(9, 3) As String, HiddenAds As Boolean
+Public Gather As Boolean, ParseGather As Boolean, GatherDate As Boolean, OpenSingle As Boolean, SingleFile As String, ExportFile As String, ClearEdit As Boolean, NotClearFile As Boolean, BeepSounds(10) As String, StartWithOpen As String, KeyLogs(9, 3) As String
+', HiddenAds As Boolean
 
 
 Public Declare Function PlaySound Lib "winmm.dll" Alias "PlaySoundA" (ByVal lpszName As String, ByVal hModule As Long, ByVal dwFlags As Long) As Long

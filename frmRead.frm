@@ -6,7 +6,7 @@ Begin VB.Form frmRead
    Caption         =   "FFXI Parser Online 6.1.0"
    ClientHeight    =   6390
    ClientLeft      =   165
-   ClientTop       =   855
+   ClientTop       =   735
    ClientWidth     =   7275
    Icon            =   "frmRead.frx":0000
    KeyPreview      =   -1  'True
@@ -18,7 +18,7 @@ Begin VB.Form frmRead
       BorderStyle     =   0  'None
       Height          =   4650
       Left            =   60
-      TabIndex        =   41
+      TabIndex        =   39
       Top             =   1320
       Visible         =   0   'False
       Width           =   7215
@@ -28,7 +28,7 @@ Begin VB.Form frmRead
          Left            =   4680
          List            =   "frmRead.frx":1E7F
          Style           =   2  'Dropdown List
-         TabIndex        =   49
+         TabIndex        =   47
          Top             =   30
          Width           =   1215
       End
@@ -37,7 +37,7 @@ Begin VB.Form frmRead
          Height          =   255
          Index           =   4
          Left            =   2400
-         TabIndex        =   48
+         TabIndex        =   46
          Top             =   60
          Width           =   975
       End
@@ -45,7 +45,7 @@ Begin VB.Form frmRead
          Caption         =   "Refresh"
          Height          =   315
          Left            =   5940
-         TabIndex        =   47
+         TabIndex        =   45
          Top             =   30
          Width           =   1155
       End
@@ -54,7 +54,7 @@ Begin VB.Form frmRead
          Height          =   255
          Index           =   3
          Left            =   3420
-         TabIndex        =   46
+         TabIndex        =   44
          Top             =   60
          Width           =   1275
       End
@@ -63,7 +63,7 @@ Begin VB.Form frmRead
          Height          =   255
          Index           =   2
          Left            =   1440
-         TabIndex        =   45
+         TabIndex        =   43
          Top             =   60
          Width           =   975
       End
@@ -72,7 +72,7 @@ Begin VB.Form frmRead
          Height          =   255
          Index           =   1
          Left            =   660
-         TabIndex        =   44
+         TabIndex        =   42
          Top             =   60
          Width           =   735
       End
@@ -81,14 +81,14 @@ Begin VB.Form frmRead
          Height          =   255
          Index           =   0
          Left            =   0
-         TabIndex        =   43
+         TabIndex        =   41
          Top             =   60
          Width           =   675
       End
       Begin RichTextLib.RichTextBox RTB_Crafting 
          Height          =   4230
          Left            =   0
-         TabIndex        =   42
+         TabIndex        =   40
          TabStop         =   0   'False
          ToolTipText     =   "Double Click to Save"
          Top             =   420
@@ -116,7 +116,7 @@ Begin VB.Form frmRead
       BorderStyle     =   0  'None
       Height          =   4650
       Left            =   60
-      TabIndex        =   37
+      TabIndex        =   35
       Top             =   1320
       Visible         =   0   'False
       Width           =   7215
@@ -125,7 +125,7 @@ Begin VB.Form frmRead
          Height          =   240
          Index           =   0
          Left            =   0
-         TabIndex        =   39
+         TabIndex        =   37
          Top             =   45
          Value           =   -1  'True
          Width           =   1050
@@ -135,14 +135,14 @@ Begin VB.Form frmRead
          Height          =   240
          Index           =   1
          Left            =   1080
-         TabIndex        =   38
+         TabIndex        =   36
          Top             =   45
          Width           =   1545
       End
       Begin RichTextLib.RichTextBox RTB_Averages 
          Height          =   4350
          Left            =   0
-         TabIndex        =   40
+         TabIndex        =   38
          TabStop         =   0   'False
          ToolTipText     =   "Double Click to Save"
          Top             =   300
@@ -179,7 +179,7 @@ Begin VB.Form frmRead
          Height          =   240
          Index           =   6
          Left            =   3900
-         TabIndex        =   36
+         TabIndex        =   34
          Top             =   45
          Width           =   825
       End
@@ -269,85 +269,6 @@ Begin VB.Form frmRead
       Left            =   6360
       Top             =   6060
    End
-   Begin VB.Frame frameSupport 
-      Caption         =   "Support FFXIP!"
-      BeginProperty Font 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   700
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      ForeColor       =   &H00FF0000&
-      Height          =   1215
-      Left            =   60
-      TabIndex        =   33
-      Top             =   60
-      Width           =   7155
-      Begin VB.Timer timerAd 
-         Interval        =   5000
-         Left            =   6960
-         Top             =   480
-      End
-      Begin VB.Label lblHide 
-         Alignment       =   1  'Right Justify
-         Caption         =   "Hide"
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   -1  'True
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00FF0000&
-         Height          =   195
-         Left            =   6720
-         MouseIcon       =   "frmRead.frx":200C
-         MousePointer    =   99  'Custom
-         TabIndex        =   35
-         Top             =   0
-         Visible         =   0   'False
-         Width           =   315
-      End
-      Begin VB.Image imgPaypal 
-         Height          =   465
-         Left            =   5760
-         MouseIcon       =   "frmRead.frx":215E
-         MousePointer    =   99  'Custom
-         Picture         =   "frmRead.frx":22B0
-         Top             =   420
-         Width           =   930
-      End
-      Begin VB.Image imgB 
-         Height          =   855
-         Left            =   420
-         Picture         =   "frmRead.frx":2615
-         Top             =   1080
-         Visible         =   0   'False
-         Width           =   5055
-      End
-      Begin VB.Image imgA 
-         Height          =   855
-         Left            =   360
-         Picture         =   "frmRead.frx":8961
-         Top             =   1080
-         Visible         =   0   'False
-         Width           =   5055
-      End
-      Begin VB.Image imgAd 
-         Height          =   855
-         Left            =   120
-         MouseIcon       =   "frmRead.frx":F126
-         MousePointer    =   99  'Custom
-         Picture         =   "frmRead.frx":F278
-         Top             =   240
-         Width           =   5055
-      End
-   End
    Begin VB.Timer timerKeyLogger 
       Enabled         =   0   'False
       Interval        =   1
@@ -361,9 +282,9 @@ Begin VB.Form frmRead
    End
    Begin VB.ComboBox comboUser 
       Height          =   315
-      ItemData        =   "frmRead.frx":15A3D
+      ItemData        =   "frmRead.frx":200C
       Left            =   1800
-      List            =   "frmRead.frx":15A3F
+      List            =   "frmRead.frx":200E
       Sorted          =   -1  'True
       Style           =   2  'Dropdown List
       TabIndex        =   11
@@ -382,9 +303,9 @@ Begin VB.Form frmRead
    End
    Begin VB.ComboBox comboDisplay 
       Height          =   315
-      ItemData        =   "frmRead.frx":15A41
+      ItemData        =   "frmRead.frx":2010
       Left            =   360
-      List            =   "frmRead.frx":15A60
+      List            =   "frmRead.frx":202F
       Style           =   2  'Dropdown List
       TabIndex        =   8
       Top             =   6030
@@ -452,7 +373,7 @@ Begin VB.Form frmRead
       ReadOnly        =   -1  'True
       ScrollBars      =   3
       RightMargin     =   5.00000e5
-      TextRTF         =   $"frmRead.frx":15AAF
+      TextRTF         =   $"frmRead.frx":207E
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "Arial"
          Size            =   8.25
@@ -473,7 +394,7 @@ Begin VB.Form frmRead
       _ExtentX        =   11139
       _ExtentY        =   4233
       _Version        =   393217
-      TextRTF         =   $"frmRead.frx":15B26
+      TextRTF         =   $"frmRead.frx":20F5
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "Arial"
          Size            =   8.25
@@ -499,7 +420,7 @@ Begin VB.Form frmRead
       ReadOnly        =   -1  'True
       ScrollBars      =   3
       RightMargin     =   5.00000e5
-      TextRTF         =   $"frmRead.frx":15B9D
+      TextRTF         =   $"frmRead.frx":216C
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "Arial"
          Size            =   8.25
@@ -543,7 +464,7 @@ Begin VB.Form frmRead
       ReadOnly        =   -1  'True
       ScrollBars      =   3
       RightMargin     =   5.00000e5
-      TextRTF         =   $"frmRead.frx":15C14
+      TextRTF         =   $"frmRead.frx":21E3
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "Arial"
          Size            =   8.25
@@ -587,9 +508,9 @@ Begin VB.Form frmRead
       End
       Begin VB.ComboBox comboMOB 
          Height          =   315
-         ItemData        =   "frmRead.frx":15C8B
+         ItemData        =   "frmRead.frx":225A
          Left            =   45
-         List            =   "frmRead.frx":15C8D
+         List            =   "frmRead.frx":225C
          Sorted          =   -1  'True
          TabIndex        =   16
          ToolTipText     =   "Select/Type and hit Enter"
@@ -683,7 +604,7 @@ Begin VB.Form frmRead
       ReadOnly        =   -1  'True
       ScrollBars      =   3
       RightMargin     =   5.00000e5
-      TextRTF         =   $"frmRead.frx":15C8F
+      TextRTF         =   $"frmRead.frx":225E
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "Arial"
          Size            =   8.25
@@ -697,7 +618,7 @@ Begin VB.Form frmRead
    Begin RichTextLib.RichTextBox RTB_Log 
       Height          =   4650
       Left            =   45
-      TabIndex        =   34
+      TabIndex        =   33
       TabStop         =   0   'False
       ToolTipText     =   "Double Click to Save"
       Top             =   1305
@@ -710,7 +631,7 @@ Begin VB.Form frmRead
       ReadOnly        =   -1  'True
       ScrollBars      =   3
       RightMargin     =   5.00000e5
-      TextRTF         =   $"frmRead.frx":15D06
+      TextRTF         =   $"frmRead.frx":22D5
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "Arial"
          Size            =   8.25
@@ -893,24 +814,6 @@ Begin VB.Form frmRead
          Caption         =   "&Clear Data"
       End
    End
-   Begin VB.Menu mnuOnline 
-      Caption         =   "O&nline"
-      Begin VB.Menu mnuOnlineSetup 
-         Caption         =   "&Setup"
-      End
-      Begin VB.Menu mnuOnlineTransmit 
-         Caption         =   "&Transmit"
-      End
-      Begin VB.Menu mnuOnlineView 
-         Caption         =   "&View"
-         Begin VB.Menu mnuDamage 
-            Caption         =   "Damage Data"
-         End
-         Begin VB.Menu mnuCrafting 
-            Caption         =   "Crafting Data"
-         End
-      End
-   End
    Begin VB.Menu mnuViewMain 
       Caption         =   "&View"
       Begin VB.Menu mnuView 
@@ -1018,7 +921,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
 Option Explicit
-Dim IGE As Boolean
+'Dim IGE As Boolean
 Public BeepNotWave As Boolean, LastGather As Boolean
 
 Dim CurrentDay As String, CurrentTime As String, CurrentMoon As String, CurrentPerc As String, PrevResult As String, CraftDirection As String
@@ -1055,6 +958,8 @@ Dim StartTime As Date, StopTime As Date
 Dim StartTimeDPS As Date, StopTimeDPS As Date
 Dim FightStartTime As Date, FightStopTime As Date
 
+Dim Delimiter As String
+Const HeaderLength = 53
 
 Private WithEvents tIcon As TrayIcon
 Attribute tIcon.VB_VarHelpID = -1
@@ -1378,7 +1283,7 @@ Private Function ColumnText() As String
 30    ColumnText = ColumnText & vbTab & ResizePart("Total", 525)
 
 40    If ReportOptions(18) = 1 Then
-50        ColumnText = ColumnText & vbTab & ResizePart("DMG %", 525)
+50        ColumnText = ColumnText & vbTab & ResizePart("DMG.%", 525)
 60    End If
 70    If ReportOptions(0) = 1 Then
 80        ColumnText = ColumnText & vbTab & ResizePart("Melee", 525)
@@ -1399,61 +1304,61 @@ Private Function ColumnText() As String
 230       ColumnText = ColumnText & vbTab & ResizePart("Effect", 525)
 240   End If
 250   If ReportOptions(7) = 1 Then
-260       ColumnText = ColumnText & vbTab & ResizePart("M Hit %", 525)
+260       ColumnText = ColumnText & vbTab & ResizePart("M.Hit.%", 525)
 270   End If
 280   If ReportOptions(8) = 1 Then
-290       ColumnText = ColumnText & vbTab & ResizePart("M Ht/Ms", 525)
+290       ColumnText = ColumnText & vbTab & ResizePart("M.Ht/Ms", 525)
 300   End If
 310   If ReportOptions(3) = 1 Then
-320       ColumnText = ColumnText & vbTab & ResizePart("M Hi/Lo", 525)
+320       ColumnText = ColumnText & vbTab & ResizePart("M.Hi/Lo", 525)
 330   End If
 340   If ReportOptions(4) = 1 Then
-350       ColumnText = ColumnText & vbTab & ResizePart("M Avg", 525)
+350       ColumnText = ColumnText & vbTab & ResizePart("M.Avg", 525)
 360   End If
 370   If ReportOptions(26) = 1 Then
-380       ColumnText = ColumnText & vbTab & ResizePart("R Hit %", 525)
+380       ColumnText = ColumnText & vbTab & ResizePart("R.Hit.%", 525)
 390   End If
 400   If ReportOptions(25) = 1 Then
-410       ColumnText = ColumnText & vbTab & ResizePart("R Ht/Ms", 525)
+410       ColumnText = ColumnText & vbTab & ResizePart("R.Ht/Ms", 525)
 420   End If
 430   If ReportOptions(27) = 1 Then
-440       ColumnText = ColumnText & vbTab & ResizePart("R Hi/Lo", 525)
+440       ColumnText = ColumnText & vbTab & ResizePart("R.Hi/Lo", 525)
 450   End If
 460   If ReportOptions(28) = 1 Then
-470       ColumnText = ColumnText & vbTab & ResizePart("R Avg", 525)
+470       ColumnText = ColumnText & vbTab & ResizePart("R.Avg", 525)
 480   End If
 490   If ReportOptions(30) = 1 Then
-500       ColumnText = ColumnText & vbTab & ResizePart("Sp Hi/Lo", 525)
+500       ColumnText = ColumnText & vbTab & ResizePart("Sp.Hi/Lo", 525)
 510   End If
 520   If ReportOptions(29) = 1 Then
-530       ColumnText = ColumnText & vbTab & ResizePart("Sp Avg", 525)
+530       ColumnText = ColumnText & vbTab & ResizePart("Sp.Avg", 525)
 540   End If
 550   If ReportOptions(36) = 1 Then
-560       ColumnText = ColumnText & vbTab & ResizePart("Sp MP", 525)
+560       ColumnText = ColumnText & vbTab & ResizePart("Sp.MP", 525)
 570   End If
 580   If ReportOptions(32) = 1 Then
-590       ColumnText = ColumnText & vbTab & ResizePart("Sk Hi/Lo", 525)
+590       ColumnText = ColumnText & vbTab & ResizePart("Sk.Hi/Lo", 525)
 600   End If
 610   If ReportOptions(31) = 1 Then
-620       ColumnText = ColumnText & vbTab & ResizePart("Sk Avg", 525)
+620       ColumnText = ColumnText & vbTab & ResizePart("Sk.Avg", 525)
 630   End If
 640   If ReportOptions(22) = 1 Then
-650       ColumnText = ColumnText & vbTab & ResizePart("Sk #", 525)
+650       ColumnText = ColumnText & vbTab & ResizePart("Sk.#", 525)
 660   End If
 670   If ReportOptions(33) = 1 Then
-680       ColumnText = ColumnText & vbTab & ResizePart("Ab Hi/Lo", 525)
+680       ColumnText = ColumnText & vbTab & ResizePart("Ab.Hi/Lo", 525)
 690   End If
 700   If ReportOptions(34) = 1 Then
-710       ColumnText = ColumnText & vbTab & ResizePart("Ab Avg", 525)
+710       ColumnText = ColumnText & vbTab & ResizePart("Ab.Avg", 525)
 720   End If
 730   If ReportOptions(5) = 1 Then
-740       ColumnText = ColumnText & vbTab & ResizePart("Crit %", 525)
+740       ColumnText = ColumnText & vbTab & ResizePart("Crit.%", 525)
 750   End If
 760   If ReportOptions(6) = 1 Then
-770       ColumnText = ColumnText & vbTab & ResizePart("Crit #", 525)
+770       ColumnText = ColumnText & vbTab & ResizePart("Crit.#", 525)
 780   End If
 790   If ReportOptions(9) = 1 Then
-800       ColumnText = ColumnText & vbTab & ResizePart("Avd %", 525)
+800       ColumnText = ColumnText & vbTab & ResizePart("Avd.%", 525)
 810   End If
 820   If ReportOptions(10) = 1 Then
 830       ColumnText = ColumnText & vbTab & ResizePart("Tk/Av", 525)
@@ -1489,7 +1394,7 @@ Private Function ColumnText() As String
 1130      ColumnText = ColumnText & vbTab & ResizePart("Heal", 525)
 1140  End If
 1150  If ReportOptions(35) = 1 Then
-1160      ColumnText = ColumnText & vbTab & ResizePart("HP MP", 525)
+1160      ColumnText = ColumnText & vbTab & ResizePart("HP.MP", 525)
 1170  End If
 1180  ColumnText = ColumnText & vbTab
 
@@ -2617,15 +2522,15 @@ Dim i As Integer
 Dim FSO As FileSystemObject
 Set FSO = New FileSystemObject
 
-If InStr(1, SingleFile, Format(Date, "MM-DD-YYYY"), vbTextCompare) = 0 Then
+If InStr(1, SingleFile, Format(Date, "YYYY-MM-DD"), vbTextCompare) = 0 Then
     For i = 1 To 100
-        If FSO.FileExists(App.Path & "\" & Format(Date, "MM-DD-YYYY") & AlphaNumber(i) & ".prs") = False Then
-            SingleFile = App.Path & "\" & Format(Date, "MM-DD-YYYY") & AlphaNumber(i) & ".prs"
+        If FSO.FileExists(App.Path & "\" & Format(Date, "YYYY-MM-DD") & AlphaNumber(i) & ".prs") = False Then
+            SingleFile = App.Path & "\" & Format(Date, "YYYY-MM-DD") & AlphaNumber(i) & ".prs"
             Exit For
         End If
     Next
     If SingleFile = "" Then
-        SingleFile = App.Path & "\" & Format(Date, "MM-DD-YYYY") & ".prs"
+        SingleFile = App.Path & "\" & Format(Date, "YYYY-MM-DD") & ".prs"
         FSO.DeleteFile SingleFile, True
     End If
 End If
@@ -3178,12 +3083,16 @@ Public Sub ParseLog(FullFile() As String)
 10    On Error GoTo Err_Handler
       Dim ff As Long, i As Integer
       Dim FoundInstance As Boolean
+      Dim DelimiterPos As Integer
 
 20    For ff = 0 To UBound(FullFile)
 30        PrevLineB = PrevLineA
 40        PrevLineA = CurrentLine
 50        CurrentLine = FullFile(ff)
-60        LineType = Trim(Right(CurrentLine, 3))
+          ' Find the last delimiter.
+          DelimiterPos = InStrRev(CurrentLine, Delimiter, 10)
+          CurrentLine = Mid$(CurrentLine, DelimiterPos)
+60        LineType = Trim$(Right$(CurrentLine, 3))
 70        SetActiveLineType
 80        If ActiveLineType <= 19 Then
 90            RetrieveUsers
@@ -4777,13 +4686,20 @@ Public Sub StartNew()
 1030                          End If
 1040                      End If
 1050                      If StopLogging = False Then
-1060                          If Mid(CurrentLine, 51, 2) = "01" And Index <> 0 Then
-1070                              FullFile(Index - 1) = Left(FullFile(Index - 1), Len(FullFile(Index - 1)) - 3) & Mid(CurrentLine, 56) & " " & LineType
-1080                          Else
+                              Dim DelimiterPos As Integer
+                              Dim Text As String
+                              
+                              'Sometimes there are extra characters between the two delimiters for some reason.
+                              DelimiterPos = InStr(HeaderLength + 2, CurrentLine, Delimiter)
+                              Text = Mid(CurrentLine, DelimiterPos + 2)
+                              ' Seems like this was trying to join multi-line messages, but this isn't how to identify them.
+'1060                          If Mid(CurrentLine, 51, 2) = "01" And Index <> 0 Then
+'1070                              FullFile(Index - 1) = Left(FullFile(Index - 1), Len(FullFile(Index - 1)) - 3) & Text & " " & LineType
+'1080                          Else
 1090                              ReDim Preserve FullFile(Index)
-1100                              FullFile(Index) = Mid(CurrentLine, 54) & " " & LineType
+1100                              FullFile(Index) = Delimiter & Text & " " & LineType
 1110                              Index = Index + 1
-1120                          End If
+'1120                          End If
 1130                      End If
 1140                  Loop
 1150                Close #f
@@ -5537,14 +5453,14 @@ mnuExportXML.Enabled = False
         
 Me.Caption = "FFXIP - Online - " & App.Major & "." & App.Minor & "." & App.Revision
 comboUser.ListIndex = 0
-If GetSetting(App.Title, "Settings", "AutoCheck", Default:="") = "" Then
-    If MsgBox("OK to always check for updates?", vbYesNo + vbQuestion, "Version Check") = vbYes Then
-        SaveSetting App.Title, "Settings", "AutoCheck", "1"
-    Else
-        SaveSetting App.Title, "Settings", "AutoCheck", "0"
-    End If
-End If
-BeepNotWave = GetSetting(App.Title, "Settings", "Beeps", Default:="1")
+'If GetSetting(App.Title, "Settings", "AutoCheck", Default:="") = "" Then
+'    If MsgBox("OK to always check for updates?", vbYesNo + vbQuestion, "Version Check") = vbYes Then
+'        SaveSetting App.Title, "Settings", "AutoCheck", "1"
+'    Else
+'        SaveSetting App.Title, "Settings", "AutoCheck", "0"
+'    End If
+'End If
+BeepNotWave = GetSetting(App.Title, "Settings", "Beeps", Default:="0")
 Dim ColumnText As String
 For i = 0 To UBound(ReportOptions)
     If i = 0 Or i = 1 Or i = 2 Or i = 7 Or i = 18 Then
@@ -5554,9 +5470,9 @@ For i = 0 To UBound(ReportOptions)
     End If
 Next
 
-HiddenAds = GetSetting(App.Title, "Settings", "Monkey", Default:="0")
-If HiddenAds Then
-    frameSupport.Visible = False
+'HiddenAds = GetSetting(App.Title, "Settings", "Monkey", Default:="0")
+'If HiddenAds Then
+'    frameSupport.Visible = False
     frameEdit.Top = 100
     frameChat.Top = 100
     frameCraft.Top = 100
@@ -5568,10 +5484,10 @@ If HiddenAds Then
     RTB_Fish.Top = 100
     RTB_Log.Top = 100
     RTB_Details.Top = 100
-End If
+'End If
 mnuEnableSounds.Checked = GetSetting(App.Title, "Settings", "EnableSounds", Default:="1")
 mnuAltHome.Checked = GetSetting(App.Title, "Settings", "AltHome", Default:="1")
-mnuUpdate.Checked = GetSetting(App.Title, "Settings", "AutoCheck", Default:="0")
+'mnuUpdate.Checked = GetSetting(App.Title, "Settings", "AutoCheck", Default:="0")
 mnuTray.Checked = GetSetting(App.Title, "Settings", "TrayIcon", Default:="1")
 mnuOnly.Checked = GetSetting(App.Title, "Settings", "NewOnly", Default:="0")
 mnuKeyEnable.Checked = GetSetting(App.Title, "Settings", "EnableKeyLogging", Default:="0")
@@ -5583,33 +5499,33 @@ End If
 If mnuTray.Checked Then
     AddTray
 End If
-If GetSetting(App.Title, "Settings", "AutoCheck", Default:="") = "1" Or GetSetting(App.Title, "Settings", "AutoCheck", Default:="") = "True" Then
-    Dim MyUpdate As String
-    MyUpdate = inet.OpenURL("http://www.frontiernet.net/~Spyle/FFXI/update.txt")
+'If GetSetting(App.Title, "Settings", "AutoCheck", Default:="") = "1" Or GetSetting(App.Title, "Settings", "AutoCheck", Default:="") = "True" Then
+'    Dim MyUpdate As String
+'    MyUpdate = inet.OpenURL("http://www.frontiernet.net/~Spyle/FFXI/update.txt")
     
-    If Left$(MyUpdate, 7) = "Version" Then
-        Dim MyPosA, MyPosB, MyVersion
-        MyPosA = InStr(1, MyUpdate, "|")
-        MyVersion = App.Major & "." & App.Minor & "." & App.Revision
-        Clipboard.Clear
-        Clipboard.SetText Mid$(MyUpdate, 10, MyPosA - 10)
-        If MyVersion <> Mid$(MyUpdate, 10, MyPosA - 10) Then
-            Do Until MyUpdate = ""
-                MyPosA = InStr(1, MyUpdate, "|")
-                If MyPosA <> 0 Then
-                    Updates = Updates & Mid$(MyUpdate, 1, MyPosA - 1) & vbNewLine
-                    MyUpdate = Mid$(MyUpdate, MyPosA + 1)
-                Else
-                    Updates = Updates & MyUpdate
-                    MyUpdate = ""
-                End If
-            Loop
-            If MsgBox(Updates & vbNewLine & vbNewLine & "Visit website?" & vbNewLine & "(www.frontiernet.net/~Spyle/FFXI/ffxi.html)", vbYesNo, "Update Info") = vbYes Then
-                ShellExecute Me.hwnd, vbNullString, "http://www.frontiernet.net/~Spyle/FFXI/ffxi.html", vbNullString, "C:\", SW_SHOWNORMAL
-            End If
-        End If
-    End If
-End If
+'    If Left$(MyUpdate, 7) = "Version" Then
+'        Dim MyPosA, MyPosB, MyVersion
+'        MyPosA = InStr(1, MyUpdate, "|")
+'        MyVersion = App.Major & "." & App.Minor & "." & App.Revision
+'        Clipboard.Clear
+'        Clipboard.SetText Mid$(MyUpdate, 10, MyPosA - 10)
+'        If MyVersion <> Mid$(MyUpdate, 10, MyPosA - 10) Then
+'            Do Until MyUpdate = ""
+'                MyPosA = InStr(1, MyUpdate, "|")
+'                If MyPosA <> 0 Then
+'                    Updates = Updates & Mid$(MyUpdate, 1, MyPosA - 1) & vbNewLine
+'                    MyUpdate = Mid$(MyUpdate, MyPosA + 1)
+'                Else
+'                    Updates = Updates & MyUpdate
+'                    MyUpdate = ""
+'                End If
+'            Loop
+'            If MsgBox(Updates & vbNewLine & vbNewLine & "Visit website?" & vbNewLine & "(www.frontiernet.net/~Spyle/FFXI/ffxi.html)", vbYesNo, "Update Info") = vbYes Then
+'                ShellExecute Me.hwnd, vbNullString, "http://www.frontiernet.net/~Spyle/FFXI/ffxi.html", vbNullString, "C:\", SW_SHOWNORMAL
+'            End If
+'        End If
+'    End If
+'End If
 
 
 comboDisplay.ListIndex = 0
@@ -5632,7 +5548,7 @@ End If
 If MyHeight <> 0 And MyHeight < Screen.Height Then
    Me.Height = MyHeight
 End If
-If MyX < 0 Then MyX = 0
+'If MyX < 0 Then MyX = 0
 If MyY < 0 Then MyY = 0
 Me.Left = MyX
 Me.Top = MyY
@@ -5651,12 +5567,12 @@ End If
 If Me.Top > Screen.Height Then
     Me.Top = 0
 End If
-If Command$ = "" Then
-    If MsgBox("If your PC explodes while using this program, it's not my fault." & vbNewLine & vbNewLine & "Please read the Notes/Known issues on the website before emailing me!" & vbNewLine & vbNewLine & "********TaruTaru heal Galka - Galka eat TaruTaru********", vbOKCancel + vbInformation, "Notice!") = vbCancel Then
-        Unload Me
-        Exit Sub
-    End If
-End If
+'If Command$ = "" Then
+'    If MsgBox("If your PC explodes while using this program, it's not my fault." & vbNewLine & vbNewLine & "Please read the Notes/Known issues on the website before emailing me!" & vbNewLine & vbNewLine & "********TaruTaru heal Galka - Galka eat TaruTaru********", vbOKCancel + vbInformation, "Notice!") = vbCancel Then
+'        Unload Me
+'        Exit Sub
+'    End If
+'End If
 
 Dim OpenLine As String, MyPos As Integer
 If FSO.FileExists(App.Path & "\weaponskills.txt") Then
@@ -5688,6 +5604,8 @@ Else
     SpellList(0).Name = "Cure"
     SpellList(0).MPCost = 8
 End If
+
+Delimiter = Chr$(30) & Chr$(1)
 
 If StartWithOpen <> "" Then
     OpenSingle = True
@@ -5744,17 +5662,17 @@ End Sub
 
 
 Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
-If ReportError <> "" Then
-    Dim Result
-    If MsgBox("Send last error to website for debugging?", vbQuestion + vbYesNo, "Errors Found") = vbYes Then
-        Screen.MousePointer = vbHourglass
-        Result = inet.OpenURL("http://ffxi.mmorpgparsers.com/update_error.php?error_text=" & ReportError & "&version=" & App.Major & "." & App.Minor & "." & App.Revision)
-        If Result = "error" Then
-            MsgBox "Upload failed. Please email 'error_log.txt' to Spyle@Frontiernet.net", vbInformation, "Error"
-        End If
-        Screen.MousePointer = vbDefault
-    End If
-End If
+'If ReportError <> "" Then
+'    Dim Result
+'    If MsgBox("Send last error to website for debugging?", vbQuestion + vbYesNo, "Errors Found") = vbYes Then
+'        Screen.MousePointer = vbHourglass
+'        Result = inet.OpenURL("http://ffxi.mmorpgparsers.com/update_error.php?error_text=" & ReportError & "&version=" & App.Major & "." & App.Minor & "." & App.Revision)
+'        If Result = "error" Then
+'            MsgBox "Upload failed. Please email 'error_log.txt' to Spyle@Frontiernet.net", vbInformation, "Error"
+'        End If
+'        Screen.MousePointer = vbDefault
+'    End If
+'End If
 
 On Error Resume Next
 timerRead.Enabled = False
@@ -5776,10 +5694,10 @@ frameChat.Width = Me.Width - 225
 frameSummary.Width = Me.Width - 225
 frameEdit.Width = Me.Width - 225
 frameCraft.Width = Me.Width - 225
-frameSupport.Width = Me.Width - 225
-imgAd.Left = (frameSupport.Width / 2) - (imgAd.Width / 2) - 750
-imgPaypal.Left = imgAd.Left + imgAd.Width + 500
-lblHide.Left = (frameSupport.Width - lblHide.Width) - 100
+'frameSupport.Width = Me.Width - 225
+'imgAd.Left = (frameSupport.Width / 2) - (imgAd.Width / 2) - 750
+'imgPaypal.Left = imgAd.Left + imgAd.Width + 500
+'lblHide.Left = (frameSupport.Width - lblHide.Width) - 100
 
 RTB_Report.Width = Me.Width - 225
 RTB_Log.Width = Me.Width - 225
@@ -5793,11 +5711,11 @@ RTB_Averages.Width = Me.Width - 225
 'lblInfo(1).Left = listResults.Width + 250
 'lblInfo(0).Top = (frameEdit.Height - lblInfo(0).Height) - 200
 
-If HiddenAds Then
+'If HiddenAds Then
     frameEdit.Height = Me.Height - 1300
-Else
-    frameEdit.Height = Me.Height - 2500
-End If
+'Else
+'    frameEdit.Height = Me.Height - 2500
+'End If
 listResults.Height = frameEdit.Height - 1000
 cmdSelect.Top = listResults.Top + listResults.Height
 cmdUnselect.Top = listResults.Top + listResults.Height
@@ -5826,7 +5744,7 @@ cmdUnselectPlayers.Width = (listPlayers.Width / 2) - 50
 cmdSelectPlayers.Left = listPlayers.Left + 50
 cmdUnselectPlayers.Left = listPlayers.Left + cmdSelectPlayers.Width + 75
 
-If HiddenAds Then
+'If HiddenAds Then
     frameChat.Height = Me.Height - 1300
     frameCraft.Height = Me.Height - 1300
     frameSummary.Height = Me.Height - 1300
@@ -5838,19 +5756,19 @@ If HiddenAds Then
     RTB_Fish.Height = Me.Height - 1300
     RTB_Log.Height = Me.Height - 1300
     RTB_Details.Height = Me.Height - 1300
-Else
-    frameChat.Height = Me.Height - 2500
-    frameCraft.Height = Me.Height - 2500
-    frameSummary.Height = Me.Height - 2500
-    RTB_Chat.Height = frameChat.Height - 320
-    RTB_Crafting.Height = frameCraft.Height - 320
-    RTB_Averages.Height = frameSummary.Height - 320
-    RTB_Report.Height = Me.Height - 2500
-    RTB_User.Height = Me.Height - 2500
-    RTB_Fish.Height = Me.Height - 2500
-    RTB_Log.Height = Me.Height - 2500
-    RTB_Details.Height = Me.Height - 2500
-End If
+'Else
+'    frameChat.Height = Me.Height - 2500
+'    frameCraft.Height = Me.Height - 2500
+'    frameSummary.Height = Me.Height - 2500
+'    RTB_Chat.Height = frameChat.Height - 320
+'    RTB_Crafting.Height = frameCraft.Height - 320
+'    RTB_Averages.Height = frameSummary.Height - 320
+'    RTB_Report.Height = Me.Height - 2500
+'    RTB_User.Height = Me.Height - 2500
+'    RTB_Fish.Height = Me.Height - 2500
+'    RTB_Log.Height = Me.Height - 2500
+'    RTB_Details.Height = Me.Height - 2500
+'End If
 
 Shape1.Width = Me.Width - 3100
 
@@ -5898,13 +5816,13 @@ End Sub
 
 
 
-Private Sub imgAd_Click()
-ShellExecute Me.hwnd, vbNullString, "http://tracking.ige.com/a/2105/b/1/e/38", vbNullString, "C:\", SW_SHOWNORMAL
-End Sub
+'Private Sub imgAd_Click()
+'ShellExecute Me.hwnd, vbNullString, "http://tracking.ige.com/a/2105/b/1/e/38", vbNullString, "C:\", SW_SHOWNORMAL
+'End Sub
 
-Private Sub imgPaypal_Click()
-ShellExecute Me.hwnd, vbNullString, "https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=Spyle%40Frontiernet%2enet&item_name=Parser Support&no_shipping=0&no_note=1&tax=0&currency_code=USD", vbNullString, "C:\", SW_SHOWNORMAL
-End Sub
+'Private Sub imgPaypal_Click()
+'ShellExecute Me.hwnd, vbNullString, "https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=Spyle%40Frontiernet%2enet&item_name=Parser Support&no_shipping=0&no_note=1&tax=0&currency_code=USD", vbNullString, "C:\", SW_SHOWNORMAL
+'End Sub
 
 
 
@@ -6120,9 +6038,9 @@ End Sub
 
 
 
-Private Sub mnuCrafting_Click()
-ShellExecute Me.hwnd, vbNullString, "http://ffxi.mmorpgparsers.com/craft", vbNullString, "C:\", SW_SHOWNORMAL
-End Sub
+'Private Sub mnuCrafting_Click()
+'ShellExecute Me.hwnd, vbNullString, "http://ffxi.mmorpgparsers.com/craft", vbNullString, "C:\", SW_SHOWNORMAL
+'End Sub
 
 Private Sub mnuCSV_Click()
 On Error GoTo Err_Handler
@@ -6142,9 +6060,9 @@ If Err.Number = 32755 Then
 End If
 End Sub
 
-Private Sub mnuDamage_Click()
-ShellExecute Me.hwnd, vbNullString, "http://ffxi.mmorpgparsers.com", vbNullString, "C:\", SW_SHOWNORMAL
-End Sub
+'Private Sub mnuDamage_Click()
+'ShellExecute Me.hwnd, vbNullString, "http://ffxi.mmorpgparsers.com", vbNullString, "C:\", SW_SHOWNORMAL
+'End Sub
 
 Private Sub mnuEnableSounds_Click()
 If mnuEnableSounds.Checked = False Then
@@ -6328,13 +6246,13 @@ Private Sub mnuMainExit_Click()
 Unload Me
 End Sub
 
-Private Sub mnuOnlineSetup_Click()
-frmSetup.Show
-End Sub
+'Private Sub mnuOnlineSetup_Click()
+'frmSetup.Show
+'End Sub
 
-Private Sub mnuOnlineTransmit_Click()
-frmTransmit.Show
-End Sub
+'Private Sub mnuOnlineTransmit_Click()
+'frmTransmit.Show
+'End Sub
 
 Private Sub mnuOnly_Click()
 If mnuOnly.Checked = False Then
@@ -6529,13 +6447,13 @@ SaveSetting App.Title, "Settings", "TrayIcon", mnuTray.Checked
 End Sub
 
 Private Sub mnuUpdate_Click()
-If mnuUpdate.Checked = False Then
-    mnuUpdate.Checked = True
-Else
-    mnuUpdate.Checked = False
-End If
+'If mnuUpdate.Checked = False Then
+'    mnuUpdate.Checked = True
+'Else
+'    mnuUpdate.Checked = False
+'End If
 
-SaveSetting App.Title, "Settings", "AutoCheck", mnuUpdate.Checked
+'SaveSetting App.Title, "Settings", "AutoCheck", mnuUpdate.Checked
 End Sub
 
 
@@ -6921,15 +6839,15 @@ End If
 End Sub
 
 
-Private Sub timerAd_Timer()
-If IGE Then
-    imgAd.Picture = imgA.Picture
-    IGE = False
-Else
-    imgAd.Picture = imgB.Picture
-    IGE = True
-End If
-End Sub
+'Private Sub timerAd_Timer()
+'If IGE Then
+    'imgAd.Picture = imgA.Picture
+    'IGE = False
+'Else
+    'imgAd.Picture = imgB.Picture
+    'IGE = True
+'End If
+'End Sub
 
 Private Sub timerBeeps_Timer()
 On Error Resume Next

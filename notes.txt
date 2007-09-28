@@ -1,0 +1,22 @@
+40,b1,e2,8000bf00,00001f68,00001ce8,0013,00,01,02,00,Seia casts Blink.
+40,b1,e2,8000bf00,00001f68,00001ce9,0022,00,01,02,00,Seia gains the effect of Blink.1
+
+code, ??A, ??B, ??C, conversation#, line#, length, ??D, ??E, ??F, ??G
+
+??A/??B
+??D = always 0?
+??E = always 1?
+??F = 0 for echo/logon/lsmes, 1 for chat, 2 for battle/logout
+??G = always 0?
+
+log starts 100 chars in
+
+^?1 seems to mean that the conversation is done; if it isn't there
+this is a multi-line thing
+
+ffxip expects ??G to indicate multi-line continuation, but it doesn't
+
+BUGS:
+losing a few fights when switching parties
+getting confused by mob names with numbers - searching for a number is silly
+

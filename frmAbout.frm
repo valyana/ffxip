@@ -37,7 +37,7 @@ Begin VB.Form frmAbout
    End
    Begin VB.Label Label2 
       BackStyle       =   0  'Transparent
-      Caption         =   "Visit my webpage: "
+      Caption         =   "Old webpage: "
       ForeColor       =   &H00000000&
       Height          =   240
       Left            =   90
@@ -47,13 +47,13 @@ Begin VB.Form frmAbout
    End
    Begin VB.Label Label1 
       BackStyle       =   0  'Transparent
-      Caption         =   "Written by Spyle"
+      Caption         =   "Original by Spyle, modified by Valyana"
       ForeColor       =   &H00000000&
       Height          =   240
       Left            =   90
       TabIndex        =   1
       Top             =   1080
-      Width           =   2625
+      Width           =   3225
    End
    Begin VB.Label lblVersion 
       BackStyle       =   0  'Transparent
@@ -102,7 +102,7 @@ End Sub
 
 
 Private Sub lblAbout_Click()
-ShellExecute Me.hwnd, vbNullString, "http://www.frontiernet.net/~Spyle/FFXI/ffxi.html", vbNullString, "C:\", SW_SHOWNORMAL
+'ShellExecute Me.hwnd, vbNullString, "http://www.frontiernet.net/~Spyle/FFXI/ffxi.html", vbNullString, "C:\", SW_SHOWNORMAL
 End Sub
 
 
