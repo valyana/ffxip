@@ -97,6 +97,7 @@ Begin VB.Form frmRead
          _ExtentY        =   7461
          _Version        =   393217
          BorderStyle     =   0
+         Enabled         =   -1  'True
          ReadOnly        =   -1  'True
          ScrollBars      =   3
          RightMargin     =   5.00000e5
@@ -151,6 +152,7 @@ Begin VB.Form frmRead
          _ExtentY        =   7673
          _Version        =   393217
          BorderStyle     =   0
+         Enabled         =   -1  'True
          ReadOnly        =   -1  'True
          ScrollBars      =   3
          RightMargin     =   5.00000e5
@@ -195,6 +197,7 @@ Begin VB.Form frmRead
          _ExtentY        =   7567
          _Version        =   393217
          BorderStyle     =   0
+         Enabled         =   -1  'True
          ReadOnly        =   -1  'True
          ScrollBars      =   3
          RightMargin     =   5.00000e5
@@ -370,6 +373,7 @@ Begin VB.Form frmRead
       _ExtentY        =   8202
       _Version        =   393217
       BorderStyle     =   0
+      Enabled         =   -1  'True
       ReadOnly        =   -1  'True
       ScrollBars      =   3
       RightMargin     =   5.00000e5
@@ -394,6 +398,7 @@ Begin VB.Form frmRead
       _ExtentX        =   11139
       _ExtentY        =   4233
       _Version        =   393217
+      Enabled         =   -1  'True
       TextRTF         =   $"frmRead.frx":20F5
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "Arial"
@@ -417,6 +422,7 @@ Begin VB.Form frmRead
       _ExtentY        =   8043
       _Version        =   393217
       BorderStyle     =   0
+      Enabled         =   -1  'True
       ReadOnly        =   -1  'True
       ScrollBars      =   3
       RightMargin     =   5.00000e5
@@ -461,6 +467,7 @@ Begin VB.Form frmRead
       _ExtentY        =   8202
       _Version        =   393217
       BorderStyle     =   0
+      Enabled         =   -1  'True
       ReadOnly        =   -1  'True
       ScrollBars      =   3
       RightMargin     =   5.00000e5
@@ -601,6 +608,7 @@ Begin VB.Form frmRead
       _ExtentY        =   8202
       _Version        =   393217
       BorderStyle     =   0
+      Enabled         =   -1  'True
       ReadOnly        =   -1  'True
       ScrollBars      =   3
       RightMargin     =   5.00000e5
@@ -628,6 +636,7 @@ Begin VB.Form frmRead
       _ExtentY        =   8202
       _Version        =   393217
       BorderStyle     =   0
+      Enabled         =   -1  'True
       ReadOnly        =   -1  'True
       ScrollBars      =   3
       RightMargin     =   5.00000e5
@@ -766,9 +775,6 @@ Begin VB.Form frmRead
       End
       Begin VB.Menu mnuOnly 
          Caption         =   "&Read New Logs Only"
-      End
-      Begin VB.Menu mnuUpdate 
-         Caption         =   "&Auto Update Check"
       End
       Begin VB.Menu mnuTray 
          Caption         =   "Show as &Tray Icon"
@@ -958,7 +964,10 @@ Dim StartTime As Date, StopTime As Date
 Dim StartTimeDPS As Date, StopTimeDPS As Date
 Dim FightStartTime As Date, FightStopTime As Date
 
-Dim Delimiter As String
+'The line start delimiter, ^^^A
+Const Delimiter = ""
+
+'The length of the CSV header, before the delimiters.
 Const HeaderLength = 53
 
 Private WithEvents tIcon As TrayIcon
@@ -2307,7 +2316,7 @@ Private Function PlayerText(ArrayType() As udtStatistics, i As Integer, TotalDMG
 110           End If
 120       End If
 130       If .TotalDMG <> 0 Then 'Add text to AltHome feature
-140         AltHome = AltHome & Trim(Left(.Attacker, 8)) & ":" & .TotalDMG & ","
+140         AltHome = AltHome & Trim$(Left$(.Attacker, 8)) & ":" & .TotalDMG & ","
 150       End If
 160       If ReportOptions(0) = 1 Then 'MELEE DAMAGE
 170           PlayerText = PlayerText & vbTab & ResizePart(CStr(.Basic.Damage + .Critical.Damage), 525)
@@ -2540,24 +2549,23 @@ End Sub
 Private Function FindNumber() As Integer
 10    On Error GoTo Err_Handler
       'This is used to retrieve the amount of damage/heal.
-      Dim LineText As String, MyPos As Integer
+      Dim MyPos As Integer
 20    MyPos = InStrRev(CurrentLine, ".")
 30    If MyPos = 0 Then
 40        MyPos = Len(CurrentLine) - 2
 50    End If
-60    LineText = Left(CurrentLine, MyPos)
 
       Dim i As Integer, FullNumber As String, FoundNumber As Boolean
-70    For i = 1 To Len(LineText)
-80        If IsNumeric(Mid(LineText, i, 1)) Then
-90            FullNumber = FullNumber & Mid(LineText, i, 1)
+70    For i = MyPos To 3 Step -1
+80        If IsNumeric(Mid$(CurrentLine, i, 1)) Then
+90            FullNumber = Mid$(CurrentLine, i, 1) & FullNumber
 100           FoundNumber = True
 110       ElseIf FoundNumber Then
 120           Exit For
 130       End If
 140   Next
 150   If FullNumber <> "" Then
-160       FindNumber = CDbl(FullNumber)
+160       FindNumber = CInt(FullNumber)
 170   Else
 180       FindNumber = 0
 190   End If
@@ -2780,7 +2788,7 @@ Private Sub GenerateReports(Recalculation As Boolean)
 1490  LowDMG = 99999
 1500  For i = 0 To UBound(BattleStats)
 1510      With BattleStats(i)
-1520          If .Defender = Defender And Left(.Attacker, 2) <> "SC" And .TotalDMG > 10 Then
+1520          If .Defender = Defender And Left$(.Attacker, 2) <> "SC" And .TotalDMG > 10 Then
 1530              If .TotalDMG > HighDMG Then
 1540                  HighDMG = .TotalDMG
 1550              End If
@@ -2935,7 +2943,7 @@ Private Sub GenerateReports(Recalculation As Boolean)
 
 2930              EstDPS = ""
 2940              For dp = 0 To UBound(DPS)
-2950                If Trim(DPS(dp, 0)) = .Attacker Then
+2950                If Trim$(DPS(dp, 0)) = .Attacker Then
 2960                    If DPS(dp, 0) <> "" Then
 2970                          If DPS(dp, 1) <> "0" And DPS(dp, 2) <> "0" And DPS(dp, 2) <> "" And DPS(dp, 1) <> "" Then
 2980                              EstDPS = Round(CDbl(DPS(dp, 1)) / CDbl(DPS(dp, 2)), 2) & " (" & DPS(dp, 2) & " seconds / " & DPS(dp, 1) & " dmg)"
@@ -2952,7 +2960,7 @@ Private Sub GenerateReports(Recalculation As Boolean)
 3090      RTB_Averages.SelStart = 0
 3100  End If
 3110  If AltHome <> "" Then
-3120    AltHome = "TTL:" & BattleTotals.TotalDMG & "," & Left(AltHome, Len(AltHome) - 1)
+3120    AltHome = "TTL:" & BattleTotals.TotalDMG & "," & Left$(AltHome, Len(AltHome) - 1)
 3130    If mnuEnableSounds.Checked = True Then
 3140      If OpenSingle = False And (Gather = False Or ParseGather = True) Then
 3150          If BeepNotWave Then
@@ -3090,7 +3098,7 @@ Public Sub ParseLog(FullFile() As String)
 40        PrevLineA = CurrentLine
 50        CurrentLine = FullFile(ff)
           ' Find the last delimiter.
-          DelimiterPos = InStrRev(CurrentLine, Delimiter, 10)
+          DelimiterPos = InStrRev(CurrentLine, Delimiter, 8)
           CurrentLine = Mid$(CurrentLine, DelimiterPos)
 60        LineType = Trim$(Right$(CurrentLine, 3))
 70        SetActiveLineType
@@ -3248,10 +3256,10 @@ Private Sub ParserCommand()
 40        BeginDPS = True
 50    ElseIf (Left$(LCase(CurrentLine), 18) = "parser direction") Then 'Crafting Direction' /echo parser direction NE
 60        MyPos = InStrRev(CurrentLine, " ")
-70        CraftDirection = Mid(CurrentLine, 20, MyPos - 20)
+70        CraftDirection = Mid$(CurrentLine, 20, MyPos - 20)
 80    ElseIf (Left$(LCase(CurrentLine), 15) = "parser failed") Then 'Failed Item' /echo parser failed blah
 90        MyPos = InStrRev(CurrentLine, " ")
-100       CraftFailed = Mid(CurrentLine, 17, MyPos - 17)
+100       CraftFailed = Mid$(CurrentLine, 17, MyPos - 17)
 110       If CraftingCSV(UBound(CraftingCSV)).Result <> "" Then
 120           CraftingCSV(UBound(CraftingCSV)).Result = "Failure-" & CraftFailed
 130       End If
@@ -3289,7 +3297,7 @@ Private Sub ParserCommand()
 450       MyPos = InStr(1, CurrentLine, "'")
 460       MyPos2 = InStr(MyPos + 1, CurrentLine, "'")
 470       timerBeepAmt = Mid$(CurrentLine, MyPos + 1, MyPos2 - (MyPos + 1))
-480       timerLength = Mid(CurrentLine, 16, 8)
+480       timerLength = Mid$(CurrentLine, 16, 8)
 490       ReadTimer = True
 500   ElseIf (Left$(LCase(CurrentLine), 13) = "parser save") Then
 510       MyPos = InStr(1, CurrentLine, ".rtf")
@@ -3343,17 +3351,17 @@ Private Sub ParserCommand()
           Dim Player As String, Job As String, SubJob As String, Level As String, UserName As String, PlayerCount As Integer, FoundPlayer As Boolean
           'parser player spyle warrior ninja 75-71 ce'
 990       MyPos = InStr(17, CurrentLine, " ")
-1000      Player = Mid(CurrentLine, 17, MyPos - 17)
-1010      Player = UCase(Left(Player, 1)) & LCase(Mid(Player, 2))
+1000      Player = Mid$(CurrentLine, 17, MyPos - 17)
+1010      Player = UCase(Left$(Player, 1)) & LCase(Mid$(Player, 2))
 1020      MyPos = InStr(MyPos, CurrentLine, " ")
 1030      MyPos2 = InStr(MyPos + 1, CurrentLine, " ")
-1040      Job = Mid(CurrentLine, MyPos + 1, MyPos2 - (MyPos + 1))
+1040      Job = Mid$(CurrentLine, MyPos + 1, MyPos2 - (MyPos + 1))
 1050      MyPos = InStr(MyPos2, CurrentLine, " ")
 1060      MyPos2 = InStr(MyPos + 1, CurrentLine, " ")
-1070      SubJob = Mid(CurrentLine, MyPos + 1, MyPos2 - (MyPos + 1))
+1070      SubJob = Mid$(CurrentLine, MyPos + 1, MyPos2 - (MyPos + 1))
 1080      MyPos = InStr(MyPos2, CurrentLine, " ")
 1090      MyPos2 = InStr(MyPos + 1, CurrentLine, " ")
-1100      Level = Mid(CurrentLine, MyPos + 1, MyPos2 - (MyPos + 1))
+1100      Level = Mid$(CurrentLine, MyPos + 1, MyPos2 - (MyPos + 1))
     
 1110      If LCase(Job) = "whm" Or LCase(Job) = "whitemage" Then
 1120        Job = "White Mage"
@@ -3457,9 +3465,9 @@ Private Sub ParserCommand()
 2050          End If
 2060      End If
 2070  ElseIf (Left$(LCase(CurrentLine), 15) = "parser window") Then
-2080      If IsNumeric(Mid(CurrentLine, 17, 1)) = True Then
-2090          If Mid(CurrentLine, 17, 1) < 8 Then
-2100              comboDisplay.ListIndex = CDbl(Mid(CurrentLine, 17, 1) - 1)
+2080      If IsNumeric(Mid$(CurrentLine, 17, 1)) = True Then
+2090          If Mid$(CurrentLine, 17, 1) < 8 Then
+2100              comboDisplay.ListIndex = CDbl(Mid$(CurrentLine, 17, 1) - 1)
 2110              comboDisplay_Click
 2120          End If
 2130      End If
@@ -3504,11 +3512,11 @@ Private Sub ReadCraft()
 40    If MyPos = 0 Then
 50        MyResult = "Failure-" & LCase(PrevResult)
 60    Else
-70        MyResult = LCase(Mid(CurrentLine, MyPos + 3, MyPos2 - (MyPos + 3)))
+70        MyResult = LCase(Mid$(CurrentLine, MyPos + 3, MyPos2 - (MyPos + 3)))
 80        PrevResult = MyResult
 90    End If
-100   If Right(MyResult, 1) = "1" Then
-110       MyResult = Mid(MyResult, Len(MyResult) - 1)
+100   If Right$(MyResult, 1) = "1" Then
+110       MyResult = Mid$(MyResult, Len(MyResult) - 1)
 120   End If
 
 130   FoundIt = False
@@ -3559,19 +3567,19 @@ Private Sub ReadCraftB()
 20    If InStr(1, CurrentLine, "was lost.") Then
 30        MyPos = InStr(1, CurrentLine, "y")
 40        MyPos2 = InStrRev(CurrentLine, " ")
-50        MyResult = Mid(CurrentLine, MyPos + 3, MyPos2 - (MyPos + 3))
+50        MyResult = Mid$(CurrentLine, MyPos + 3, MyPos2 - (MyPos + 3))
 60        PrevResult = MyResult
-70        If Right(MyResult, 1) = "1" Then
-80      MyResult = Mid(MyResult, Len(MyResult) - 1)
+70        If Right$(MyResult, 1) = "1" Then
+80      MyResult = Mid$(MyResult, Len(MyResult) - 1)
 90        End If
 100       MyResult = "Failure-" & LCase(MyResult)
 110   Else
 120       MyPos = InStr(1, CurrentLine, " ")
 130       MyPos2 = InStrRev(CurrentLine, ".")
-140       MyResult = LCase(Mid(CurrentLine, MyPos + 3, MyPos2 - (MyPos + 3)))
+140       MyResult = LCase(Mid$(CurrentLine, MyPos + 3, MyPos2 - (MyPos + 3)))
 150       PrevResult = MyResult
-160       If Right(MyResult, 1) = "1" Then
-170     MyResult = Mid(MyResult, Len(MyResult) - 1)
+160       If Right$(MyResult, 1) = "1" Then
+170     MyResult = Mid$(MyResult, Len(MyResult) - 1)
 180       End If
 190   End If
 
@@ -3634,10 +3642,10 @@ Private Sub ReadExp()
 130       End If
 140   ElseIf InStr(1, CurrentLine, "EXP chain #") Then
 150       MyPos = InStr(1, CurrentLine, "#")
-160       ExpType = CDbl(Mid(CurrentLine, MyPos + 1, 1))
+160       ExpType = CDbl(Mid$(CurrentLine, MyPos + 1, 1))
 170   ElseIf InStr(1, CurrentLine, "Limit chain #") Then
 180       MyPos = InStr(1, CurrentLine, "#")
-190       ExpType = CDbl(Mid(CurrentLine, MyPos + 1, 1))
+190       ExpType = CDbl(Mid$(CurrentLine, MyPos + 1, 1))
 200   End If
 
 
@@ -3804,7 +3812,7 @@ Private Sub ReadPlayerLoot()
       Dim LootPlayer As String, LootItem As String
       Dim MyPos As Integer, MyPos2 As Integer, lf As Integer
 20    MyPos = InStr(1, CurrentLine, " ")
-30    LootPlayer = Mid(CurrentLine, 5, MyPos - 5)
+30    LootPlayer = Mid$(CurrentLine, 5, MyPos - 5)
 40    MyPos = InStr(1, CurrentLine, " ")
 50    MyPos2 = InStr(MyPos + 1, CurrentLine, ".")
 60    LootItem = Mid$(CurrentLine, MyPos + 3, MyPos2 - (MyPos + 3))
@@ -3844,7 +3852,7 @@ Private Sub ReadTimes()
 20    If ReadTimer Then
 30        For i = 0 To UBound(TimerStart)
 40            If TimerStart(i, 0) = "" Then
-50                TimerStart(i, 0) = Replace(Mid(CurrentLine, 10, Len(CurrentLine) - 13), ".", "")
+50                TimerStart(i, 0) = Replace(Mid$(CurrentLine, 10, Len(CurrentLine) - 13), ".", "")
 60                TimerStart(i, 1) = timerLength
 70                TimerStart(i, 2) = timerBeepAmt
 80                Exit For
@@ -3859,14 +3867,14 @@ Private Sub ReadTimes()
 170       EffTotals.DMGTaken = 0
 180       EffTotals.TotalDMG = 0
 190       BeginDPS = True
-200       StartTimeDPS = Replace(Mid(CurrentLine, 10, Len(CurrentLine) - 13), ".", "")
+200       StartTimeDPS = Replace(Mid$(CurrentLine, 10, Len(CurrentLine) - 13), ".", "")
 210       ReadDPS_Start = False
 220       StopDPS = False
-230       FightStartTime = Replace(Mid(CurrentLine, 10, Len(CurrentLine) - 13), ".", "")
+230       FightStartTime = Replace(Mid$(CurrentLine, 10, Len(CurrentLine) - 13), ".", "")
 240       Read_Start = False
 250   ElseIf Read_Stop = True And FightStartTime <> Empty Then
 260       BeginDPS = False
-270       StopTimeDPS = Replace(Mid(CurrentLine, 10, Len(CurrentLine) - 13), ".", "")
+270       StopTimeDPS = Replace(Mid$(CurrentLine, 10, Len(CurrentLine) - 13), ".", "")
 280       If StartTimeDPS <> Empty Then
 290           For i = 0 To UBound(DPS)
 300               If DPS(i, 2) = "" Then DPS(i, 2) = "0"
@@ -3878,7 +3886,7 @@ Private Sub ReadTimes()
 360       End If
 370       ReadDPS_Stop = False
 380       StopDPS = True
-390       FightStopTime = Replace(Mid(CurrentLine, 10, Len(CurrentLine) - 13), ".", "")
+390       FightStopTime = Replace(Mid$(CurrentLine, 10, Len(CurrentLine) - 13), ".", "")
 400       With RTB_Report
 410           TotalSeconds = DateDiff("s", FightStartTime, FightStopTime)
 420           If TotalSeconds <> 0 Then
@@ -3927,30 +3935,30 @@ Private Sub ReadTimes()
 850       Erase ChainExp
 860       ExpType = 0
 870       TotalExp = 0
-880       StartTime = Replace(Mid(CurrentLine, 10, Len(CurrentLine) - 13), ".", "")
+880       StartTime = Replace(Mid$(CurrentLine, 10, Len(CurrentLine) - 13), ".", "")
 890       StopTime = Empty
 900       ReadEXP_Start = False
 910       StopEXP = False
 920   ElseIf ReadEXP_Stop Then
-930       StopTime = Replace(Mid(CurrentLine, 10, Len(CurrentLine) - 13), ".", "")
+930       StopTime = Replace(Mid$(CurrentLine, 10, Len(CurrentLine) - 13), ".", "")
 940       ReadEXP_Stop = False
 950       StopEXP = True
 960   End If
 970   If ReadFISH_Start Then
 980       MyPos = InStr(1, PrevLineB, ",")
 990       If MyPos <> 0 Then
-1000          FishHeader = Trim(Left(Mid(PrevLineB, MyPos + 2), Len(Mid(PrevLineB, MyPos + 2)) - 2))
-1010          FishHeader = FishHeader & " - " & Left(Trim(Mid(PrevLineA, 3)), Len(Trim(Mid(PrevLineA, 3))) - 2)
-1020          FishHeader = FishHeader & " - Earth: " & Trim(Mid(CurrentLine, 24, Len(CurrentLine) - 26))
+1000          FishHeader = Trim$(Left$(Mid$(PrevLineB, MyPos + 2), Len(Mid$(PrevLineB, MyPos + 2)) - 2))
+1010          FishHeader = FishHeader & " - " & Left$(Trim$(Mid$(PrevLineA, 3)), Len(Trim$(Mid$(PrevLineA, 3))) - 2)
+1020          FishHeader = FishHeader & " - Earth: " & Trim$(Mid$(CurrentLine, 24, Len(CurrentLine) - 26))
 1030      End If
 1040      ReadFISH_Start = False
 1050  End If
 1060  If ReadDPS_Start Then
-1070      StartTimeDPS = Replace(Mid(CurrentLine, 10, Len(CurrentLine) - 13), ".", "")
+1070      StartTimeDPS = Replace(Mid$(CurrentLine, 10, Len(CurrentLine) - 13), ".", "")
 1080      ReadDPS_Start = False
 1090      StopDPS = False
 1100  ElseIf ReadDPS_Stop Then
-1110      StopTimeDPS = Replace(Mid(CurrentLine, 10, Len(CurrentLine) - 13), ".", "")
+1110      StopTimeDPS = Replace(Mid$(CurrentLine, 10, Len(CurrentLine) - 13), ".", "")
 1120      If StartTimeDPS <> Empty Then
 1130          For i = 0 To UBound(DPS)
 1140              If DPS(i, 2) = "" Then DPS(i, 2) = "0"
@@ -4116,50 +4124,50 @@ Private Sub RetrieveUsers()
 40    If ActiveLineType <= 3 Then
 50        If ActiveLineType = 0 Then 'attacker Hits defender For
 60            MyPos = InStr(1, CurrentLine, " hit")
-70            Attacker = Mid(CurrentLine, 3, MyPos - 3)
+70            Attacker = Mid$(CurrentLine, 3, MyPos - 3)
 80            MyPos = InStr(MyPos + 3, CurrentLine, " ")
 90            MyPos2 = InStr(MyPos, CurrentLine, " for ")
-100           Defender = Mid(CurrentLine, MyPos + 1, MyPos2 - (MyPos + 1))
+100           Defender = Mid$(CurrentLine, MyPos + 1, MyPos2 - (MyPos + 1))
 110       ElseIf ActiveLineType = 1 Then 'additional effect: defender Takes
 120           Attacker = PreviousAttacker
 130           MyPos = InStr(21, CurrentLine, " takes ")
 140           If MyPos <> 0 Then
-150               Defender = Mid(CurrentLine, 22, MyPos - 22)
+150               Defender = Mid$(CurrentLine, 22, MyPos - 22)
 160           Else
 170               Defender = CurrentFight
 180           End If
 190       ElseIf ActiveLineType = 2 Then 'attacker's ranged attack Hits defender For
 200           MyPos = InStr(1, CurrentLine, " ranged ")
 210           If MyPos = 0 Then Exit Sub
-220           Attacker = Mid(CurrentLine, 3, MyPos - 5)
+220           Attacker = Mid$(CurrentLine, 3, MyPos - 5)
   
 230           MyPos = InStr(1, CurrentLine, " hits ")
 240           If MyPos = 0 Then
 250               MyPos = InStr(1, CurrentLine, " on ")
 260               MyPos2 = InStr(1, CurrentLine, " for ")
 270               If MyPos2 = 0 Then MyPos2 = InStr(1, CurrentLine, ".")
-280               Defender = Mid(CurrentLine, MyPos + 4, MyPos2 - (MyPos + 4))
+280               Defender = Mid$(CurrentLine, MyPos + 4, MyPos2 - (MyPos + 4))
 290           Else
 300               MyPos2 = InStr(1, CurrentLine, " for ")
 310               If MyPos2 = 0 Then MyPos2 = InStr(1, CurrentLine, ".")
-320               Defender = Mid(CurrentLine, MyPos + 6, MyPos2 - (MyPos + 6))
+320               Defender = Mid$(CurrentLine, MyPos + 6, MyPos2 - (MyPos + 6))
 330           End If
 340       ElseIf ActiveLineType = 3 Then 'attacker's attack is countered by defender, attacker takes
 350           MyPos = InStr(1, CurrentLine, " by ")
 360           MyPos2 = InStr(1, CurrentLine, ". ")
-370           Attacker = Mid(CurrentLine, MyPos + 4, MyPos2 - (MyPos + 4))
+370           Attacker = Mid$(CurrentLine, MyPos + 4, MyPos2 - (MyPos + 4))
       '290           MyPos = InStr(1, CurrentLine, ". ")
 380           MyPos2 = InStr(1, CurrentLine, "'s")
-390           Defender = Mid(CurrentLine, 3, MyPos2 - 3)
+390           Defender = Mid$(CurrentLine, 3, MyPos2 - 3)
 400       End If
   
-410       If InStr(1, "14,19", LineType) Then
+410       If InStr(1, "14,19,a3", LineType) Then
 420           CurrentFight = Defender
-430       ElseIf InStr(1, "1c,20", LineType) Then
+430       ElseIf InStr(1, "1c,20,b9", LineType) Then
 440           CurrentFight = Attacker
 450       End If
 460       CurrentFight = Replace(Replace(CurrentFight, "the ", "The "), "Cover!", "")
-470       If InStr(1, CurrentFight, "'s") Then CurrentFight = Trim(Replace(CurrentFight, "'s", ""))
+470       If InStr(1, CurrentFight, "'s") Then CurrentFight = Trim$(Replace(CurrentFight, "'s", ""))
 480   ElseIf ActiveLineType <= 11 Then
 490       MyPos = InStr(1, CurrentLine, " misses ")
 500       Select Case ActiveLineType
@@ -4172,7 +4180,7 @@ Private Sub RetrieveUsers()
 560       Case 7
 570           MyPos = InStr(1, CurrentLine, " blocks ")
 580       Case 8
-590           MyPos = InStr(1, CurrentLine, " shadows absorbs ")
+590           MyPos = InStr(1, CurrentLine, " shadow ")
 600       Case 9
 610           MyPos = InStr(1, CurrentLine, " anticipates ")
 620       Case 10
@@ -4187,7 +4195,7 @@ Private Sub RetrieveUsers()
 700       If MyPos = 0 Then Exit Sub
 710       Attacker = Mid$(CurrentLine, 3, MyPos - 3)
 720     If ActiveLineType = 8 Then
-730         Attacker = Mid(Attacker, 6)
+730         Attacker = Mid$(Attacker, 6)
 740     End If
 750       If InStr(1, CurrentLine, " uses ") Then AttackerUses = Attacker
     
@@ -4211,14 +4219,17 @@ Private Sub RetrieveUsers()
 920       End Select
     
 930       Attacker = Replace(Attacker, "'s", "")
-940       If InStr(1, CurrentLine, " misses.") = 0 And InStr(1, CurrentLine, ", but") = 0 And InStr(1, CurrentLine, " parries ") = 0 And InStr(1, CurrentLine, " blocks ") = 0 And InStr(1, CurrentLine, " absorbs the damage and ") = 0 And InStr(1, CurrentLine, " evades.") = 0 And InStr(1, CurrentLine, " anticipates the attack.") = 0 Then
-950           MyPos2 = InStr(1, CurrentLine, ".")
+940       If InStr(1, CurrentLine, " misses.") = 0 And InStr(1, CurrentLine, ", but") = 0 And InStr(1, CurrentLine, " parries ") = 0 And InStr(1, CurrentLine, " blocks ") = 0 And InStr(1, CurrentLine, " the damage and ") = 0 And InStr(1, CurrentLine, " evades.") = 0 And InStr(1, CurrentLine, " anticipates the attack.") = 0 Then
+              'X misses Y.
+950           MyPos2 = InStrRev(CurrentLine, ".")
 960           Defender = Mid$(CurrentLine, MyPos, MyPos2 - MyPos)
-970       ElseIf InStr(1, CurrentLine, " misses.") = 0 And InStr(1, CurrentLine, " parries ") = 0 And InStr(1, CurrentLine, " blocks ") = 0 And InStr(1, CurrentLine, " absorbs the damage and ") = 0 And InStr(1, CurrentLine, " evades.") = 0 And InStr(1, CurrentLine, " anticipates the attack.") = 0 Then
+970       ElseIf InStr(1, CurrentLine, " misses.") = 0 And InStr(1, CurrentLine, " parries ") = 0 And InStr(1, CurrentLine, " blocks ") = 0 And InStr(1, CurrentLine, " the damage and ") = 0 And InStr(1, CurrentLine, " evades.") = 0 And InStr(1, CurrentLine, " anticipates the attack.") = 0 Then
+              'X uses WS, but misses Y.
 980           MyPos = InStr(1, CurrentLine, ", but misses ")
-990           MyPos2 = InStr(1, CurrentLine, ".")
+990           MyPos2 = InStrRev(CurrentLine, ".")
 1000          Defender = Replace(Mid$(CurrentLine, MyPos + 13, MyPos2 - (MyPos + 13)), "the ", "The ")
 1010      ElseIf InStr(1, CurrentLine, " parries ") Or InStr(1, CurrentLine, " blocks ") Then
+              'Y parries X's attack with his weapon.
 1020          MyPos2 = InStr(1, CurrentLine, "attack ")
 1030          Defender = Mid$(CurrentLine, MyPos, MyPos2 - MyPos)
 1040      ElseIf Mid$(CurrentLine, 3, 4) <> "The " Then
@@ -4227,8 +4238,8 @@ Private Sub RetrieveUsers()
 1070          Defender = ""
 1080      End If
 1090      If Defender = "" Then Defender = CurrentFight
-1100      If InStr(1, Attacker, "'s") Then Attacker = Trim(Replace(Attacker, "'s", ""))
-1110      If InStr(1, Defender, "'s") Then Defender = Trim(Replace(Defender, "'s", ""))
+1100      If InStr(1, Attacker, "'s") Then Attacker = Trim$(Replace(Attacker, "'s", ""))
+1110      If InStr(1, Defender, "'s") Then Defender = Trim$(Replace(Defender, "'s", ""))
 1120      If InStr(1, CurrentLine, " absorbs the damage and ") Or InStr(1, CurrentLine, " evades.") Or InStr(1, CurrentLine, " blocks ") Or InStr(1, CurrentLine, " parries ") Or InStr(1, CurrentLine, " anticipates the attack.") Then
 1130          PreP1 = Attacker
 1140          Attacker = Defender
@@ -4243,21 +4254,21 @@ Private Sub RetrieveUsers()
 1230          MyPos = InStr(3, CurrentLine, "s use ")
 1240      End If
 1250      AttackerUses = Mid$(CurrentLine, 3, MyPos - 3)
-1260      MyPos2 = InStr(1, CurrentLine, ".")
+1260      MyPos2 = InStrRev(CurrentLine, ".")
 1270      If MyPos2 = 0 Then
-1280          MyPos2 = InStr(1, CurrentLine, "!")
+1280          MyPos2 = InStrRev(CurrentLine, "!")
 1290      End If
 1300      If MyPos2 = 0 Then
 1310          MyPos2 = InStrRev(CurrentLine, " ")
 1320      End If
 1330      MyPos = InStr(3, CurrentLine, " uses ")
 1340      If MyPos <> 0 Then
-1350          AttackerSpecial = Mid(CurrentLine, MyPos + 6, MyPos2 - (MyPos + 6))
+1350          AttackerSpecial = Mid$(CurrentLine, MyPos + 6, MyPos2 - (MyPos + 6))
 1360      Else
-1370          AttackerSpecial = Mid(CurrentLine, MyPos + 7, MyPos2 - (MyPos + 7))
+1370          AttackerSpecial = Mid$(CurrentLine, MyPos + 7, MyPos2 - (MyPos + 7))
 1380      End If
 1390  ElseIf ActiveLineType = 14 Then
-1400      MyPos = InStr(3, CurrentLine, ".")
+1400      MyPos = InStrRev(CurrentLine, ".")
 1410      AttackerUses = "SC: " & Mid$(CurrentLine, 15, MyPos - 15)
 1420  ElseIf ActiveLineType = 13 Then
 1430      If InStr(1, CurrentLine, "ranged") = 0 Then
@@ -4270,11 +4281,11 @@ Private Sub RetrieveUsers()
 1500  ElseIf ActiveLineType = 15 Then
 1510      MyPos = InStr(3, CurrentLine, " casts ")
 1520      AttackerUses = Mid$(CurrentLine, 3, MyPos - 3)
-1530      MyPos2 = InStr(1, CurrentLine, ".")
+1530      MyPos2 = InStrRev(CurrentLine, ".")
 1540      If MyPos2 = 0 Then
 1550          MyPos2 = InStrRev(CurrentLine, " ")
 1560      End If
-1570      AttackerSpecial = Mid(CurrentLine, MyPos + 7, MyPos2 - (MyPos + 7))
+1570      AttackerSpecial = Mid$(CurrentLine, MyPos + 7, MyPos2 - (MyPos + 7))
 1580  ElseIf ActiveLineType = 16 Then
 1590      Attacker = AttackerUses
 1600      MyPos = InStr(3, CurrentLine, " take")
@@ -4292,32 +4303,32 @@ Private Sub RetrieveUsers()
 1720      MyPos = InStr(1, CurrentLine, " misses ")
 1730      If MyPos = 0 Then
 1740          MyPos = InStr(3, CurrentLine, " miss ")
-1750          MyPos2 = InStr(1, CurrentLine, ".")
+1750          MyPos2 = InStrRev(CurrentLine, ".")
 1760          If MyPos2 = 0 Then
 1770              MyPos2 = InStrRev(CurrentLine, " ")
 1780          End If
-1790          Defender = Mid(CurrentLine, MyPos + 6, MyPos2 - (MyPos + 6))
+1790          Defender = Mid$(CurrentLine, MyPos + 6, MyPos2 - (MyPos + 6))
 1800      Else
-1810          MyPos2 = InStr(1, CurrentLine, ".")
+1810          MyPos2 = InStrRev(CurrentLine, ".")
 1820          If MyPos2 = 0 Then
 1830              MyPos2 = InStrRev(CurrentLine, " ")
 1840          End If
-1850          Defender = Mid(CurrentLine, MyPos + 8, MyPos2 - (MyPos + 8))
+1850          Defender = Mid$(CurrentLine, MyPos + 8, MyPos2 - (MyPos + 8))
 1860      End If
 1870      MyPos = InStr(3, CurrentLine, " uses ")
 1880      MyPos2 = InStr(3, CurrentLine, ", ")
-1890      AttackerSpecial = Mid(CurrentLine, MyPos + 6, MyPos2 - (MyPos + 6))
+1890      AttackerSpecial = Mid$(CurrentLine, MyPos + 6, MyPos2 - (MyPos + 6))
 1900  ElseIf ActiveLineType = 19 Then
 1910      Attacker = AttackerUses
 1920      Defender = CurrentFight
 1930  ElseIf ActiveLineType = 90 Then
 1940      If InStr(1, LCase(CurrentLine), "defeats") Then
 1950          MyPos = InStr(1, CurrentLine, "defeats ")
-1960          MyPos2 = InStr(1, CurrentLine, ".")
+1960          MyPos2 = InStrRev(CurrentLine, ".")
 1970          Defender = Mid$(CurrentLine, MyPos + 8, MyPos2 - (MyPos + 8))
 1980      ElseIf InStr(1, LCase(CurrentLine), "defeated by") Then
 1990          MyPos = InStr(1, CurrentLine, "defeated by")
-2000          MyPos2 = InStr(1, CurrentLine, ".")
+2000          MyPos2 = InStrRev(CurrentLine, ".")
 2010          Defender = Mid$(CurrentLine, MyPos + 12, MyPos2 - (MyPos + 12))
 2020      Else
 2030          MyPos = InStr(1, CurrentLine, "fall")
@@ -4331,10 +4342,10 @@ Private Sub RetrieveUsers()
 
       '      if instr(1, defender," of "
 2090  Defender = Replace(Defender, "Magic Burst! ", "")
-2100  If InStr(1, Defender, "'s") Then Defender = Trim(Replace(Defender, "'s", ""))
-2110  If InStr(1, Attacker, "'s") Then Attacker = Trim(Replace(Attacker, "'s", ""))
-2120  Attacker = Trim(Attacker)
-2130  Defender = Trim(Defender)
+2100  If InStr(1, Defender, "'s") Then Defender = Trim$(Replace(Defender, "'s", ""))
+2110  If InStr(1, Attacker, "'s") Then Attacker = Trim$(Replace(Attacker, "'s", ""))
+2120  Attacker = Trim$(Attacker)
+2130  Defender = Trim$(Defender)
 
 2140  If Attacker <> "" And LineType <> "1c" And LineType <> "20" And LineType <> "1d" And LineType <> "28" And LineType <> "29" Then 'Used for Additional Effects.. Excluding enemy hits.. Bleh this is gay
 2150      PreviousAttacker = Attacker
@@ -4342,7 +4353,7 @@ Private Sub RetrieveUsers()
 
       'Add players to player combobox and listbox
       Dim FoundPlayer As Boolean, i As Integer
-2170  If (LineType = "14" Or LineType = "19" Or LineType = "28") And Attacker <> "" And InStr(1, Attacker, " ") = 0 Then
+2170  If (LineType = "14" Or LineType = "19" Or LineType = "28" Or LineType = "a3") And Attacker <> "" And InStr(1, Attacker, " ") = 0 Then
 2180      For i = 0 To listPlayers.ListCount - 1
 2190          If listPlayers.List(i) = Attacker Then
 2200              FoundPlayer = True
@@ -4429,24 +4440,25 @@ Private Sub SetActiveLineType()
       '90 = Enemy Defeated
       '99 = Other
 20    PrevActiveLineType = ActiveLineType
-30    If InStr(1, "09,0a,01,02,0c,04,0d,05,0e,06,0f,07,9d,98,a1,79,83,6a,94,8c,7f,bf,cd,cc,7a,92", LineType) = 0 Then 'Ignore lines that we don't need
-40        If InStr(1, CurrentLine, "Additional effect: ") <> 0 And InStr(1, LCase(CurrentLine), " damage") <> 0 Then
+30    If InStr(1, "09,0a,01,02,0c,04,0d,05,0e,06,0f,07,9d,98,a1,79,83,6a,94,8c,7f,bf,cd,cc,7a,92,7b", LineType) = 0 Then 'Ignore lines that we don't need
+40        If CurrentLine Like "*Additional effect: * damage*" Then
 50            ActiveLineType = 1
-60        ElseIf (InStr(1, CurrentLine, " uses") Or InStr(1, LCase(CurrentLine), "s use ")) And InStr(1, CurrentLine, ", but miss") = 0 Then
-70            ActiveLineType = 12
-80        ElseIf (InStr(1, CurrentLine, " uses") Or InStr(1, LCase(CurrentLine), "s use ")) And InStr(1, CurrentLine, ", but miss") <> 0 Then
+80        ElseIf CurrentLine Like "* use*, but miss*" Then
 90            ActiveLineType = 18
-100       ElseIf InStr(1, CurrentLine, " take") Then
+60        ElseIf CurrentLine Like "* uses *" Or CurrentLine Like "*s use *" Then
+70            ActiveLineType = 12
+140       ElseIf InStr(1, CurrentLine, " countered ") Then
+150           ActiveLineType = 3
+100       ElseIf CurrentLine Like "* take* points of damage*" Then
 110           ActiveLineType = 16
 120       ElseIf InStr(1, CurrentLine, "critical hit!") Then
 130           ActiveLineType = 13
-140       ElseIf InStr(1, LCase(CurrentLine), " counter") <> 0 And InStr(1, LCase(CurrentLine), " counterstance") = 0 Then
-150           ActiveLineType = 3
 160       ElseIf InStr(1, CurrentLine, " parries ") Then
 170           ActiveLineType = 6
+          'Can't get this message since an old shield patch, but might as well check for it for reparsing old logs.
 180       ElseIf InStr(1, CurrentLine, " blocks ") Then
 190           ActiveLineType = 7
-200       ElseIf InStr(1, CurrentLine, " absorbs the damage and ") Then
+200       ElseIf InStr(1, CurrentLine, " the damage and disappear") Then
 210           ActiveLineType = 8
 220       ElseIf InStr(1, CurrentLine, " anticipates ") Then
 230           ActiveLineType = 9
@@ -4460,7 +4472,7 @@ Private Sub SetActiveLineType()
 310           ActiveLineType = 5
 320       ElseIf InStr(1, CurrentLine, " evades") Then
 330           ActiveLineType = 11
-340       ElseIf InStr(1, CurrentLine, " hit ") Or InStr(1, CurrentLine, " hits ") Then
+340       ElseIf CurrentLine Like "* hit* points of damage*" Then
 350           ActiveLineType = 0
 360       ElseIf InStr(1, LCase(CurrentLine), "skillchain: ") Then
 370           ActiveLineType = 14
@@ -4525,10 +4537,10 @@ Private Sub SetTimeA()
       Dim MyPos, MyPos2
 20    MyPos = InStr(1, CurrentLine, ",")
 30    MyPos2 = InStr(MyPos + 1, CurrentLine, ",")
-40    CurrentDay = Mid(CurrentLine, MyPos + 2, MyPos2 - (MyPos + 2))
+40    CurrentDay = Mid$(CurrentLine, MyPos + 2, MyPos2 - (MyPos + 2))
 50    MyPos = MyPos2
 60    MyPos2 = InStr(MyPos + 2, CurrentLine, " ")
-70    CurrentTime = Mid(CurrentLine, MyPos + 2, MyPos2 - (MyPos + 2))
+70    CurrentTime = Mid$(CurrentLine, MyPos + 2, MyPos2 - (MyPos + 2))
 80    Exit Sub
 Err_Handler:
 90    HasErrors = True
@@ -4547,8 +4559,8 @@ Private Sub SetTimeB()
       Dim MyPos, MyPos2
 20    MyPos = InStr(1, CurrentLine, "(")
 30    MyPos2 = InStr(MyPos + 2, CurrentLine, ")")
-40    CurrentMoon = Trim(Mid(CurrentLine, 3, MyPos - 4))
-50    CurrentPerc = Mid(CurrentLine, MyPos + 1, MyPos2 - (MyPos + 1))
+40    CurrentMoon = Trim$(Mid$(CurrentLine, 3, MyPos - 4))
+50    CurrentPerc = Mid$(CurrentLine, MyPos + 1, MyPos2 - (MyPos + 1))
 60    Exit Sub
 Err_Handler:
 70    HasErrors = True
@@ -4661,13 +4673,13 @@ Public Sub StartNew()
   
 800                 RTB.LoadFile Mid$(fileListBox.Text, 16)
 810                 RTB_Log.Text = "Loading File: " & Mid$(fileListBox.Text, 16) & vbNewLine & RTB_Log.Text
-820                 RTB.Text = Mid(RTB.Text, 101)
+820                 RTB.Text = Mid$(RTB.Text, 101)
 830                 RTB.Text = Replace(RTB.Text, Chr(0), vbNewLine)
 840                 MyPos = InStrRev(fileListBox.Text, "\")
 850                 If Gather = False Then
-860                   CurrentFile = App.Path & "\FFXI_Logs" & Mid(fileListBox.Text, MyPos)
+860                   CurrentFile = App.Path & "\FFXI_Logs" & Mid$(fileListBox.Text, MyPos)
 870                 Else
-880                   CurrentFile = App.Path & "\FFXI_Gather" & Mid(fileListBox.Text, MyPos)
+880                   CurrentFile = App.Path & "\FFXI_Gather" & Mid$(fileListBox.Text, MyPos)
 890                 End If
 900                 RTB.SaveFile CurrentFile, rtfText
 910                 RTB_Log.Text = "Saving File: " & CurrentFile & vbNewLine & RTB_Log.Text
@@ -4677,7 +4689,7 @@ Public Sub StartNew()
 940                 Open CurrentFile For Input As f
 950                   Do Until EOF(f)
 960                       Line Input #f, CurrentLine
-970                       LineType = Left(CurrentLine, 2)
+970                       LineType = Left$(CurrentLine, 2)
 980                       If LineType = "ce" And ParserCommands = True Then
 990                           If InStr(1, LCase(CurrentLine), "parser stop logging") Then
 1000                              StopLogging = True
@@ -4691,15 +4703,16 @@ Public Sub StartNew()
                               
                               'Sometimes there are extra characters between the two delimiters for some reason.
                               DelimiterPos = InStr(HeaderLength + 2, CurrentLine, Delimiter)
-                              Text = Mid(CurrentLine, DelimiterPos + 2)
+                              Text = Mid$(CurrentLine, DelimiterPos + 2)
                               ' Seems like this was trying to join multi-line messages, but this isn't how to identify them.
-'1060                          If Mid(CurrentLine, 51, 2) = "01" And Index <> 0 Then
-'1070                              FullFile(Index - 1) = Left(FullFile(Index - 1), Len(FullFile(Index - 1)) - 3) & Text & " " & LineType
-'1080                          Else
+                              ' Or is it the right way for the 640x480 issue?
+1060                          If Mid$(CurrentLine, 51, 2) = "01" And Index <> 0 Then
+1070                              FullFile(Index - 1) = Left$(FullFile(Index - 1), Len(FullFile(Index - 1)) - 3) & Text & " " & LineType
+1080                          Else
 1090                              ReDim Preserve FullFile(Index)
 1100                              FullFile(Index) = Delimiter & Text & " " & LineType
 1110                              Index = Index + 1
-'1120                          End If
+1120                          End If
 1130                      End If
 1140                  Loop
 1150                Close #f
@@ -4990,23 +5003,23 @@ For i = 0 To UBound(CraftingCSV)
             End If
             If checkCraft(3).Value = 1 And AddIt Then 'Time
                 If comboTime.Text = "15 Mins" And .CurrentTime <> "" Then
-                    If Right(.CurrentTime, 2) <= 15 Then
-                        MyCurrentTime = Left(.CurrentTime, Len(.CurrentTime) - 2) & "00-15"
-                    ElseIf Right(.CurrentTime, 2) <= 30 Then
-                        MyCurrentTime = Left(.CurrentTime, Len(.CurrentTime) - 2) & "16-30"
-                    ElseIf Right(.CurrentTime, 2) <= 45 Then
-                        MyCurrentTime = Left(.CurrentTime, Len(.CurrentTime) - 2) & "31-45"
-                    ElseIf Right(.CurrentTime, 2) <= 59 Then
-                        MyCurrentTime = Left(.CurrentTime, Len(.CurrentTime) - 2) & "46-59"
+                    If Right$(.CurrentTime, 2) <= 15 Then
+                        MyCurrentTime = Left$(.CurrentTime, Len(.CurrentTime) - 2) & "00-15"
+                    ElseIf Right$(.CurrentTime, 2) <= 30 Then
+                        MyCurrentTime = Left$(.CurrentTime, Len(.CurrentTime) - 2) & "16-30"
+                    ElseIf Right$(.CurrentTime, 2) <= 45 Then
+                        MyCurrentTime = Left$(.CurrentTime, Len(.CurrentTime) - 2) & "31-45"
+                    ElseIf Right$(.CurrentTime, 2) <= 59 Then
+                        MyCurrentTime = Left$(.CurrentTime, Len(.CurrentTime) - 2) & "46-59"
                     End If
                 ElseIf comboTime.Text = "30 Mins" Then
-                    If Right(.CurrentTime, 2) <= 30 Then
-                        MyCurrentTime = Left(.CurrentTime, Len(.CurrentTime) - 2) & "00-30"
-                    ElseIf Right(.CurrentTime, 2) <= 59 Then
-                        MyCurrentTime = Left(.CurrentTime, Len(.CurrentTime) - 2) & "31-59"
+                    If Right$(.CurrentTime, 2) <= 30 Then
+                        MyCurrentTime = Left$(.CurrentTime, Len(.CurrentTime) - 2) & "00-30"
+                    ElseIf Right$(.CurrentTime, 2) <= 59 Then
+                        MyCurrentTime = Left$(.CurrentTime, Len(.CurrentTime) - 2) & "31-59"
                     End If
                 ElseIf comboTime.Text = "60 Mins" Then
-                    MyCurrentTime = Left(.CurrentTime, Len(.CurrentTime) - 2) & "00"
+                    MyCurrentTime = Left$(.CurrentTime, Len(.CurrentTime) - 2) & "00"
                 End If
                 If Craft(o).CurrentTime = MyCurrentTime Then
                     AddIt = True
@@ -5054,23 +5067,23 @@ For i = 0 To UBound(CraftingCSV)
             ReDim Preserve Craft(UBound(Craft) + 1)
             If checkCraft(3).Value = 1 And .CurrentTime <> "" Then  'Time
                 If comboTime.Text = "15 Mins" Then
-                    If Right(.CurrentTime, 2) <= 15 Then
-                        MyCurrentTime = Left(.CurrentTime, Len(.CurrentTime) - 2) & "00-15"
-                    ElseIf Right(.CurrentTime, 2) <= 30 Then
-                        MyCurrentTime = Left(.CurrentTime, Len(.CurrentTime) - 2) & "16-30"
-                    ElseIf Right(.CurrentTime, 2) <= 45 Then
-                        MyCurrentTime = Left(.CurrentTime, Len(.CurrentTime) - 2) & "31-45"
-                    ElseIf Right(.CurrentTime, 2) <= 59 Then
-                        MyCurrentTime = Left(.CurrentTime, Len(.CurrentTime) - 2) & "46-59"
+                    If Right$(.CurrentTime, 2) <= 15 Then
+                        MyCurrentTime = Left$(.CurrentTime, Len(.CurrentTime) - 2) & "00-15"
+                    ElseIf Right$(.CurrentTime, 2) <= 30 Then
+                        MyCurrentTime = Left$(.CurrentTime, Len(.CurrentTime) - 2) & "16-30"
+                    ElseIf Right$(.CurrentTime, 2) <= 45 Then
+                        MyCurrentTime = Left$(.CurrentTime, Len(.CurrentTime) - 2) & "31-45"
+                    ElseIf Right$(.CurrentTime, 2) <= 59 Then
+                        MyCurrentTime = Left$(.CurrentTime, Len(.CurrentTime) - 2) & "46-59"
                     End If
                 ElseIf comboTime.Text = "30 Mins" Then
-                    If Right(.CurrentTime, 2) <= 30 Then
-                        MyCurrentTime = Left(.CurrentTime, Len(.CurrentTime) - 2) & "00-30"
-                    ElseIf Right(.CurrentTime, 2) <= 59 Then
-                        MyCurrentTime = Left(.CurrentTime, Len(.CurrentTime) - 2) & "31-59"
+                    If Right$(.CurrentTime, 2) <= 30 Then
+                        MyCurrentTime = Left$(.CurrentTime, Len(.CurrentTime) - 2) & "00-30"
+                    ElseIf Right$(.CurrentTime, 2) <= 59 Then
+                        MyCurrentTime = Left$(.CurrentTime, Len(.CurrentTime) - 2) & "31-59"
                     End If
                 ElseIf comboTime.Text = "60 Mins" Then
-                    MyCurrentTime = Left(.CurrentTime, Len(.CurrentTime) - 2) & "00"
+                    MyCurrentTime = Left$(.CurrentTime, Len(.CurrentTime) - 2) & "00"
                 End If
                 Craft(UBound(Craft)).CurrentTime = MyCurrentTime
             End If
@@ -5316,7 +5329,7 @@ ElseIf comboDisplay.Text = "Loot!" Then
         FoundPlayer = False
         AddLoot = PlayerLoot(lf)
         MyPos = InStr(1, AddLoot, ";")
-        PlayerName = Mid(AddLoot, MyPos + 1)
+        PlayerName = Mid$(AddLoot, MyPos + 1)
         For pl = 0 To UBound(Players)
             If Players(pl) = PlayerName Then
                 FoundPlayer = True
@@ -5340,12 +5353,12 @@ ElseIf comboDisplay.Text = "Loot!" Then
             AddLoot = PlayerLoot(lf)
             If AddLoot <> "" Then
                 MyPos = InStr(1, AddLoot, ";")
-                PlayerName = Mid(AddLoot, MyPos + 1)
+                PlayerName = Mid$(AddLoot, MyPos + 1)
                 If PlayerName = Players(pl) Then
                     MyPos = InStr(1, AddLoot, ";")
                     RTB_User.SelBold = False
                     RTB_User.SelColor = vbBlack
-                    RTB_User.SelText = vbTab & vbTab & Left(AddLoot, MyPos - 1) & vbNewLine
+                    RTB_User.SelText = vbTab & vbTab & Left$(AddLoot, MyPos - 1) & vbNewLine
                 End If
             End If
         Next
@@ -5451,7 +5464,7 @@ mnuRecalculate.Enabled = False
 mnuExport.Enabled = False
 mnuExportXML.Enabled = False
         
-Me.Caption = "FFXIP - Online - " & App.Major & "." & App.Minor & "." & App.Revision
+Me.Caption = "FFXIP - Valyana - " & App.Major & "." & App.Minor & "." & App.Revision
 comboUser.ListIndex = 0
 'If GetSetting(App.Title, "Settings", "AutoCheck", Default:="") = "" Then
 '    If MsgBox("OK to always check for updates?", vbYesNo + vbQuestion, "Version Check") = vbYes Then
@@ -5593,8 +5606,8 @@ If FSO.FileExists(App.Path & "\spells.txt") Then
         MyPos = InStr(1, OpenLine, ",")
         If MyPos <> 0 Then
             ReDim Preserve SpellList(i)
-            SpellList(i).Name = Left(OpenLine, MyPos - 1)
-            SpellList(i).MPCost = Mid(OpenLine, MyPos + 1)
+            SpellList(i).Name = Left$(OpenLine, MyPos - 1)
+            SpellList(i).MPCost = Mid$(OpenLine, MyPos + 1)
             i = i + 1
         End If
     Loop
@@ -5604,8 +5617,6 @@ Else
     SpellList(0).Name = "Cure"
     SpellList(0).MPCost = 8
 End If
-
-Delimiter = Chr$(30) & Chr$(1)
 
 If StartWithOpen <> "" Then
     OpenSingle = True
@@ -6509,7 +6520,7 @@ For i = 0 To UBound(ChatText)
     DoEvents
     
     If Trim$(ChatText(i)) <> "" Then
-        LineType = Right(ChatText(i), 2)
+        LineType = Right$(ChatText(i), 2)
         If LineType = "09" Or LineType = "01" Then 'say
             RTB_Chat.SelColor = &H404040
         ElseIf LineType = "0a" Or LineType = "02" Then 'shout
@@ -6561,14 +6572,14 @@ For i = 0 To UBound(ChatText)
             End If
         ElseIf Index = 5 Then 'all
             If LineType = "0f" Then
-                If Right(ChatText(i), 5) = "1 0f" Then ChatText(i) = Replace(ChatText(i), "1 ", "")
+                If Right$(ChatText(i), 5) = "1 0f" Then ChatText(i) = Replace(ChatText(i), "1 ", "")
             End If
             RTB_Chat.SelText = Replace(Replace(Mid$(ChatText(i), 3, Len(ChatText(i)) - 4), "ï'", "["), "ï(", "]")
             RTB_Chat.SelText = vbNewLine
             RTB_Chat.SelStart = Len(RTB_Chat.Text)
         ElseIf Index = 6 Then 'all
             If LineType = "0f" Then
-                If Right(ChatText(i), 5) = "1 0f" Then ChatText(i) = Replace(ChatText(i), "1 ", "")
+                If Right$(ChatText(i), 5) = "1 0f" Then ChatText(i) = Replace(ChatText(i), "1 ", "")
                 RTB_Chat.SelText = Replace(Replace(Mid$(ChatText(i), 3, Len(ChatText(i)) - 4), "ï'", "["), "ï(", "]")
                 RTB_Chat.SelText = vbNewLine
                 RTB_Chat.SelStart = Len(RTB_Chat.Text)
@@ -6644,7 +6655,7 @@ If optionSummary(0).Value = True Then
       
             EstDPS = ""
             For dp = 0 To UBound(DPS)
-              If Trim(DPS(dp, 0)) = .Attacker Then
+              If Trim$(DPS(dp, 0)) = .Attacker Then
                   If DPS(dp, 0) <> "" Then
                         If DPS(dp, 1) <> "0" And DPS(dp, 2) <> "0" And DPS(dp, 2) <> "" And DPS(dp, 1) <> "" Then
                             EstDPS = Round(CDbl(DPS(dp, 1)) / CDbl(DPS(dp, 2)), 2) & " (" & DPS(dp, 2) & " seconds / " & DPS(dp, 1) & " dmg)"
@@ -7024,13 +7035,13 @@ Private Sub timerRead_Timer()
 
 300           RTB.LoadFile Mid$(fileListBox.Text, 16)
 310           RTB_Log.Text = "Loading File: " & Mid$(fileListBox.Text, 16) & vbNewLine & RTB_Log.Text
-320           RTB.Text = Mid(RTB.Text, 101)
+320           RTB.Text = Mid$(RTB.Text, 101)
 330           RTB.Text = Replace(RTB.Text, Chr(0), vbNewLine)
 340           MyPos = InStrRev(fileListBox.Text, "\")
 350           If Gather = False Then
-360             CurrentFile = App.Path & "\FFXI_Logs" & Mid(fileListBox.Text, MyPos)
+360             CurrentFile = App.Path & "\FFXI_Logs" & Mid$(fileListBox.Text, MyPos)
 370           Else
-380             CurrentFile = App.Path & "\FFXI_Gather" & Mid(fileListBox.Text, MyPos)
+380             CurrentFile = App.Path & "\FFXI_Gather" & Mid$(fileListBox.Text, MyPos)
 390           End If
 400           RTB.SaveFile CurrentFile, rtfText
 410           RTB_Log.Text = "Saving File: " & CurrentFile & vbNewLine & RTB_Log.Text
@@ -7044,7 +7055,7 @@ Private Sub timerRead_Timer()
 470             Do Until EOF(f)
 480               Line Input #f, CurrentLine
       
-490               LineType = Left(CurrentLine, 2)
+490               LineType = Left$(CurrentLine, 2)
 500               If LineType = "ce" And ParserCommands = True Then
 510                   If InStr(1, LCase(CurrentLine), "parser stop logging") Then
 520                       StopLogging = True
@@ -7055,7 +7066,7 @@ Private Sub timerRead_Timer()
 570                       If MyPos <> 0 Then
 580                           MyPos2 = InStr(MyPos + 1, CurrentLine, "'")
 590                           If MyPos2 <> 0 Then
-600                               SingleFile = Mid(CurrentLine, MyPos + 1, MyPos2 - (MyPos + 1))
+600                               SingleFile = Mid$(CurrentLine, MyPos + 1, MyPos2 - (MyPos + 1))
                                   Dim FSO As FileSystemObject
 610                               Set FSO = New FileSystemObject
                                   Dim SaveFile
@@ -7068,11 +7079,11 @@ Private Sub timerRead_Timer()
 680                   End If
 690               End If
 700               If StopLogging = False Then
-710                   If Mid(CurrentLine, 51, 2) = "01" And Index <> 0 Then
-720                       FullFile(Index - 1) = Left(FullFile(Index - 1), Len(FullFile(Index - 1)) - 3) & Mid(CurrentLine, 56) & " " & LineType
+710                   If Mid$(CurrentLine, 51, 2) = "01" And Index <> 0 Then
+720                       FullFile(Index - 1) = Left$(FullFile(Index - 1), Len(FullFile(Index - 1)) - 3) & Mid$(CurrentLine, 56) & " " & LineType
 730                   Else
 740                       ReDim Preserve FullFile(Index)
-750                       FullFile(Index) = Mid(CurrentLine, 54) & " " & LineType
+750                       FullFile(Index) = Mid$(CurrentLine, 54) & " " & LineType
 760                       Index = Index + 1
 770                   End If
 780               End If

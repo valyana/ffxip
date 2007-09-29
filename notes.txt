@@ -15,8 +15,26 @@ log starts 100 chars in
 this is a multi-line thing
 
 ffxip expects ??G to indicate multi-line continuation, but it doesn't
+ maybe it does for 640x480
 
 BUGS:
-losing a few fights when switching parties
-getting confused by mob names with numbers - searching for a number is silly
+losing a few fights when switching parties (9-24a) - fixed by increasing stats size
+having to cut-and-paste to get a proper parse - fixed by stats size
+stopping stats at all 3-18a 3-31a - fixed by size
+no stats at first 5-12a - mostly fixed by size
 
+getting confused by mob names with numbers (9-27a) fixed
+counter bug (1-28a) 3-31a fixed
+"spell fails to take effect" 3-31a fixed
+missing alliance members in summary fixed
+
+the symmetric data gathering seems wrong to me; we are interested in
+per-mob results, so all the data should be keyed off the mob.
+ use a dictionary within a dictionary so we don't have to mess with hard limits
+
+Other TODO:
+implement spell accuracy
+ maybe avg per spell for nukes, resist rate for debuffs
+ both for physical blue magic
+sort output
+handle SA/TA without WS (file under ability?)

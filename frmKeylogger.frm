@@ -930,11 +930,11 @@ Next
 For i = 0 To UBound(KeyLogs)
     If KeyLogs(i, 0) <> "" Then
         MyPos = InStr(1, KeyLogs(i, 0), "-")
-        If Left(KeyLogs(i, 0), MyPos - 1) = "CTRL" Or Left(KeyLogs(i, 0), MyPos - 1) = "ALT" Or Left(KeyLogs(i, 0), MyPos - 1) = "SHIFT" Then
-            comboType(i).Text = Left(KeyLogs(i, 0), MyPos - 1)
+        If Left$(KeyLogs(i, 0), MyPos - 1) = "CTRL" Or Left$(KeyLogs(i, 0), MyPos - 1) = "ALT" Or Left$(KeyLogs(i, 0), MyPos - 1) = "SHIFT" Then
+            comboType(i).Text = Left$(KeyLogs(i, 0), MyPos - 1)
         End If
-        If Right(KeyLogs(i, 0), 1) <> "-" Then
-            txtKey(i).Text = Right(KeyLogs(i, 0), 1)
+        If Right$(KeyLogs(i, 0), 1) <> "-" Then
+            txtKey(i).Text = Right$(KeyLogs(i, 0), 1)
         End If
         txtLen(i).Text = KeyLogs(i, 1)
         If KeyLogs(i, 2) <> "" Then

@@ -71,8 +71,8 @@ Public Type udtEfficiency
     ATKTaken As Integer
     DMGTaken As Long
 End Type
-'Too small for HNM
-Public BattleStats(50) As udtStatistics
+'Should really be a Dictionary of Dictionaries
+Public BattleStats(200) As udtStatistics
 Public BattleTotals As udtStatistics
 Public SummaryStats() As udtStatistics
 Public FullStats() As udtStatistics
